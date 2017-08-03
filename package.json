@@ -9,9 +9,12 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@angular/animations": "^4.3.3",
+    "@types/jquery": "^3.2.10",
     "body-parser": "^1.17.2",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
+    "jquery": "^3.2.1",
     "mongoose": "^4.11.5"
   }
 }

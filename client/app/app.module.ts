@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@ import {AppServices} from "./services/services"
 import {gatewayComponent } from "./components/gateway/gateway.component"
 @NgModule({
     declarations: [
+        BrowserAnimationsModule,
         AppComponent,
         NavMenuComponent,
         newUserComponent,

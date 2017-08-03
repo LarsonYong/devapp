@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
+var animations_1 = require("@angular/platform-browser/animations");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
@@ -25,6 +26,7 @@ var AppModule = (function () {
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
+                animations_1.BrowserAnimationsModule,
                 app_component_1.AppComponent,
                 navmenu_component_1.NavMenuComponent,
                 newUser_component_1.newUserComponent,

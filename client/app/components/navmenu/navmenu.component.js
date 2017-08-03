@@ -17,18 +17,16 @@ var NavMenuComponent = (function () {
     function NavMenuComponent() {
     }
     NavMenuComponent.prototype.clicked = function (event) {
-        var menu = event.target.parentElement.parentElement.parentElement;
-        var test_attr = menu.attributes.class;
-        var menu_width = menu.attributes['width'].value;
-        console.log(test_attr);
-        console.log(menu_width);
+        var mm = document.getElementById('menu-bar');
+        var nm_width = document.getElementById('menu-bar');
+        mm.style.width = '10%';
     };
     NavMenuComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'nav-menu',
             templateUrl: 'navmenu.component.html',
-            styleUrls: ['navmenu.component.css']
+            styleUrls: ['navmenu.component.css'],
         }),
         __metadata("design:paramtypes", [])
     ], NavMenuComponent);
