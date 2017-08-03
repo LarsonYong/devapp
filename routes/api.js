@@ -12,4 +12,7 @@ router.get('/',function(req,resp,next){
     })
 });
 
+router.get('/api/lgoin',function (req,res,next) {
+
+});
 module.exports=router;

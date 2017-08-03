@@ -1,4 +1,4 @@
-<div class='main-nav'>
+<div class='main-nav' id="menu-bar">
     <div class='navbar navbar-inverse'>
         <div class='navbar-header'>
             <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>
@@ -7,7 +7,7 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' id="menu-bttn" [routerLink]="['/home']">Menu</a>
+            <a (click)="clicked($event)" class='navbar-brand' id="menu-bttn">Menu</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
@@ -23,8 +23,8 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/Gateway']">
-                        <span class='glyphicon glyphicon-user'></span> Gateway
+                    <a [routerLink]="['/gateway']">
+                        <span class='glyphicon glyphicon-tasks'></span> Gateway
                     </a>
                 </li>
             </ul>

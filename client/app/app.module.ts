@@ -10,6 +10,7 @@ import {homeComponent}  from "./components/home/home.component";
 import {editComponent} from "./components/edit/edit.component";
 import {detailsComponent} from "./components/details/details.component";
 import {AppServices} from "./services/services"
+import {gatewayComponent } from "./components/gateway/gateway.component"
 @NgModule({
     declarations: [
         AppComponent,
@@ -18,6 +19,7 @@ import {AppServices} from "./services/services"
         homeComponent,
         editComponent,
         detailsComponent,
+        gatewayComponent
     ],
     providers: [AppServices],
     imports: [BrowserModule,
@@ -29,7 +31,9 @@ import {AppServices} from "./services/services"
             { path: 'details/:id', component: detailsComponent },
             { path: 'newUser', component: newUserComponent },
             { path: 'edit/:id', component: editComponent },
-            { path: '**', redirectTo: 'home' }
+            { path: 'gateway', component: gatewayComponent },
+            { path: '**', redirectTo: 'home' },
+
         ])],
     bootstrap: [AppComponent]
 })

@@ -10,4 +10,12 @@ import { Component } from '@angular/core';
     styleUrls: ['navmenu.component.css']
 })
 export class NavMenuComponent {
+    constructor(){}
+    clicked(event){
+        const menu = event.target.parentElement.parentElement.parentElement;
+        const test_attr = menu.attributes.class;
+        const menu_width = menu.attributes['width'].value;
+        console.log(test_attr);
+        console.log(menu_width);
+    }
 }

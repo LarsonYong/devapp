@@ -5,9 +5,10 @@ import { Component } from '@angular/core';
 
 @Component({
     moduleId: module.id,
-    selector: 'edit',
-    templateUrl: 'edit.component.html',
+    selector: 'gateway',
+    templateUrl: 'gateway.component.html',
 
 })
-export class editComponent {
+export class gatewayComponent {
+
 }

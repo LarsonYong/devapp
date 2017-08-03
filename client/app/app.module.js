@@ -18,6 +18,7 @@ var home_component_1 = require("./components/home/home.component");
 var edit_component_1 = require("./components/edit/edit.component");
 var details_component_1 = require("./components/details/details.component");
 var services_1 = require("./services/services");
+var gateway_component_1 = require("./components/gateway/gateway.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -30,6 +31,7 @@ var AppModule = (function () {
                 home_component_1.homeComponent,
                 edit_component_1.editComponent,
                 details_component_1.detailsComponent,
+                gateway_component_1.gatewayComponent
             ],
             providers: [services_1.AppServices],
             imports: [platform_browser_1.BrowserModule,
@@ -41,7 +43,8 @@ var AppModule = (function () {
                     { path: 'details/:id', component: details_component_1.detailsComponent },
                     { path: 'newUser', component: newUser_component_1.newUserComponent },
                     { path: 'edit/:id', component: edit_component_1.editComponent },
-                    { path: '**', redirectTo: 'home' }
+                    { path: 'gateway', component: gateway_component_1.gatewayComponent },
+                    { path: '**', redirectTo: 'home' },
                 ])],
             bootstrap: [app_component_1.AppComponent]
         })
