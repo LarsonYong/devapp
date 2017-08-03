@@ -1,4 +1,7 @@
 "use strict";
+/**
+ * Created by jack on 8/3/17.
+ */
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -9,30 +12,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-/**
- * Created by jack on 8/2/17.
- */
 var core_1 = require("@angular/core");
-var navmenu_service_1 = require("../../services/navmenu.service");
-var NavMenuComponent = (function () {
-    function NavMenuComponent(nav) {
-        this.nav = nav;
+var NavbarService = (function () {
+    function NavbarService() {
+        this.visiable = false;
     }
-    NavMenuComponent.prototype.clicked = function (event) {
-        var mm = document.getElementById('menu-bar');
-        var nm_width = document.getElementById('menu-bar');
-        mm.style.width = '10%';
+    NavbarService.prototype.hide = function () {
+        this.visiable = false;
     };
-    NavMenuComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'nav-menu',
-            templateUrl: 'navmenu.component.html',
-            styleUrls: ['navmenu.component.css'],
-        }),
-        __metadata("design:paramtypes", [navmenu_service_1.NavbarService])
-    ], NavMenuComponent);
-    return NavMenuComponent;
+    NavbarService.prototype.show = function () {
+        this.visiable = true;
+    };
+    NavbarService.prototype.toggle = function () {
+        this.visiable = !this.visiable;
+    };
+    NavbarService = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [])
+    ], NavbarService);
+    return NavbarService;
 }());
-exports.NavMenuComponent = NavMenuComponent;
-//# sourceMappingURL=navmenu.component.js.map
+exports.NavbarService = NavbarService;
+//# sourceMappingURL=navmenu.service.js.map

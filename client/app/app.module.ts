@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -12,9 +11,9 @@ import {editComponent} from "./components/edit/edit.component";
 import {detailsComponent} from "./components/details/details.component";
 import {AppServices} from "./services/services"
 import {gatewayComponent } from "./components/gateway/gateway.component"
+import {NavbarService} from "./services/navmenu.service"
 @NgModule({
     declarations: [
-        BrowserAnimationsModule,
         AppComponent,
         NavMenuComponent,
         newUserComponent,
@@ -23,8 +22,12 @@ import {gatewayComponent } from "./components/gateway/gateway.component"
         detailsComponent,
         gatewayComponent
     ],
-    providers: [AppServices],
-    imports: [BrowserModule,
+    providers: [
+        AppServices,
+        NavbarService
+    ],
+    imports: [
+        BrowserModule,
         HttpModule,
         FormsModule,
         RouterModule.forRoot([

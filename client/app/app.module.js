@@ -8,7 +8,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var platform_browser_1 = require("@angular/platform-browser");
-var animations_1 = require("@angular/platform-browser/animations");
 var http_1 = require("@angular/http");
 var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
@@ -20,13 +19,13 @@ var edit_component_1 = require("./components/edit/edit.component");
 var details_component_1 = require("./components/details/details.component");
 var services_1 = require("./services/services");
 var gateway_component_1 = require("./components/gateway/gateway.component");
+var navmenu_service_1 = require("./services/navmenu.service");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
             declarations: [
-                animations_1.BrowserAnimationsModule,
                 app_component_1.AppComponent,
                 navmenu_component_1.NavMenuComponent,
                 newUser_component_1.newUserComponent,
@@ -35,8 +34,12 @@ var AppModule = (function () {
                 details_component_1.detailsComponent,
                 gateway_component_1.gatewayComponent
             ],
-            providers: [services_1.AppServices],
-            imports: [platform_browser_1.BrowserModule,
+            providers: [
+                services_1.AppServices,
+                navmenu_service_1.NavbarService
+            ],
+            imports: [
+                platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
@@ -47,7 +50,8 @@ var AppModule = (function () {
                     { path: 'edit/:id', component: edit_component_1.editComponent },
                     { path: 'gateway', component: gateway_component_1.gatewayComponent },
                     { path: '**', redirectTo: 'home' },
-                ])],
+                ])
+            ],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);
