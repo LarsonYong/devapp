@@ -4,27 +4,32 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
-import {NavMenuComponent}  from './components/navmenu/navmenu.component';
-import { newUserComponent } from "./components/newUser/newUser.component";
-import {homeComponent}  from "./components/home/home.component";
-import {editComponent} from "./components/edit/edit.component";
-import {detailsComponent} from "./components/details/details.component";
-import {AppServices} from "./services/services"
-import {gatewayComponent } from "./components/gateway/gateway.component"
-import {NavbarService} from "./services/navmenu.service"
+import { NavMenuComponent}  from './components/navmenu/navmenu.component';
+import { NewUserComponent } from "./components/newUser/newUser.component";
+import { HomeComponent}  from "./components/home/home.component";
+import { EditComponent} from "./components/edit/edit.component";
+import { DetailsComponent} from "./components/details/details.component";
+import { AppServices} from "./services/services"
+import { GatewayComponent } from "./components/gateway/gateway.component"
+import { NavbarService} from "./services/navmenu.service"
+// import { LoginRouteGuard } from "./services/checklogin.service"
+import { LoginService} from "./services/login.service"
+import { LoginComponent} from "./components/login/login.component"
 @NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
-        newUserComponent,
-        homeComponent,
-        editComponent,
-        detailsComponent,
-        gatewayComponent
+        NewUserComponent,
+        HomeComponent,
+        EditComponent,
+        DetailsComponent,
+        GatewayComponent,
+        LoginComponent
     ],
     providers: [
         AppServices,
-        NavbarService
+        NavbarService,
+        LoginService,
     ],
     imports: [
         BrowserModule,
@@ -32,11 +37,12 @@ import {NavbarService} from "./services/navmenu.service"
         FormsModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: homeComponent },
-            { path: 'details/:id', component: detailsComponent },
-            { path: 'newUser', component: newUserComponent },
-            { path: 'edit/:id', component: editComponent },
-            { path: 'gateway', component: gatewayComponent },
+            { path:'login', component: LoginComponent},
+            { path: 'home', component: HomeComponent},
+            { path: 'details/:id', component: DetailsComponent },
+            { path: 'newUser', component: NewUserComponent },
+            { path: 'edit/:id', component: EditComponent },
+            { path: 'gateway', component: GatewayComponent },
             { path: '**', redirectTo: 'home' },
 
         ])],

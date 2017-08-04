@@ -9,5 +9,5 @@ import { Component } from '@angular/core';
     templateUrl: 'edit.component.html',
 
 })
-export class editComponent {
+export class EditComponent {
 }

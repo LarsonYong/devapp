@@ -10,27 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Created by jack on 8/2/17.
+ * Created by jack on 8/3/17.
  */
 var core_1 = require("@angular/core");
-var services_1 = require("../../services/services");
-var HomeComponent = (function () {
-    function HomeComponent(userService) {
-        var _this = this;
-        this.userService = userService;
-        this.UserList = [];
-        this.userService.getUserList()
-            .subscribe(function (data) { return (_this.UserList = data.json()); });
+var alert_service_1 = require("../../services/alert.service");
+var AlertComponent = (function () {
+    function AlertComponent(alertService) {
+        this.alertService = alertService;
     }
-    HomeComponent = __decorate([
+    AlertComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.alertService.getMessage().subscribe(function (message) { _this.message = message; });
+    };
+    AlertComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'home',
-            templateUrl: 'home.component.html',
+            selector: 'alert',
+            templateUrl: 'alert.component.html'
         }),
-        __metadata("design:paramtypes", [services_1.AppServices])
-    ], HomeComponent);
-    return HomeComponent;
+        __metadata("design:paramtypes", [alert_service_1.AlertService])
+    ], AlertComponent);
+    return AlertComponent;
 }());
-exports.HomeComponent = HomeComponent;
-//# sourceMappingURL=home.component.js.map
+exports.AlertComponent = AlertComponent;
+//# sourceMappingURL=alert.component.js.map

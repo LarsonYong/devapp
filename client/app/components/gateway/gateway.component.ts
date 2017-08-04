@@ -9,6 +9,6 @@ import { Component } from '@angular/core';
     templateUrl: 'gateway.component.html',
 
 })
-export class gatewayComponent {
+export class GatewayComponent {
 
 }

@@ -10,7 +10,7 @@ import { AppServices } from "../../services/services"
     templateUrl: 'home.component.html',
 
 })
-export class homeComponent {
+export class HomeComponent {
     public UserList = [];
     public constructor(private userService:AppServices){
         this.userService.getUserList()

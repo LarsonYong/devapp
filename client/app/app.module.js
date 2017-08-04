@@ -20,6 +20,9 @@ var details_component_1 = require("./components/details/details.component");
 var services_1 = require("./services/services");
 var gateway_component_1 = require("./components/gateway/gateway.component");
 var navmenu_service_1 = require("./services/navmenu.service");
+// import { LoginRouteGuard } from "./services/checklogin.service"
+var login_service_1 = require("./services/login.service");
+var login_component_1 = require("./components/login/login.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -28,15 +31,17 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 navmenu_component_1.NavMenuComponent,
-                newUser_component_1.newUserComponent,
-                home_component_1.homeComponent,
-                edit_component_1.editComponent,
-                details_component_1.detailsComponent,
-                gateway_component_1.gatewayComponent
+                newUser_component_1.NewUserComponent,
+                home_component_1.HomeComponent,
+                edit_component_1.EditComponent,
+                details_component_1.DetailsComponent,
+                gateway_component_1.GatewayComponent,
+                login_component_1.LoginComponent
             ],
             providers: [
                 services_1.AppServices,
-                navmenu_service_1.NavbarService
+                navmenu_service_1.NavbarService,
+                login_service_1.LoginService,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -44,11 +49,12 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full' },
-                    { path: 'home', component: home_component_1.homeComponent },
-                    { path: 'details/:id', component: details_component_1.detailsComponent },
-                    { path: 'newUser', component: newUser_component_1.newUserComponent },
-                    { path: 'edit/:id', component: edit_component_1.editComponent },
-                    { path: 'gateway', component: gateway_component_1.gatewayComponent },
+                    { path: 'login', component: login_component_1.LoginComponent },
+                    { path: 'home', component: home_component_1.HomeComponent },
+                    { path: 'details/:id', component: details_component_1.DetailsComponent },
+                    { path: 'newUser', component: newUser_component_1.NewUserComponent },
+                    { path: 'edit/:id', component: edit_component_1.EditComponent },
+                    { path: 'gateway', component: gateway_component_1.GatewayComponent },
                     { path: '**', redirectTo: 'home' },
                 ])
             ],

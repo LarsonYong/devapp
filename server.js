@@ -30,7 +30,9 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 
 app.use('/',index);
+app.use('/api/*',api);
 app.use('/api',api);
+
 app.use('*',index);
 
 app.listen(port,function () {

@@ -13,7 +13,9 @@ mongoose.connect(db,function (error) {
 var Schema = mongoose.Schema;
 var User_Schema = new Schema({
     Username: String,
-    Skill: String
+    Skill: String,
+    Project: String,
+    admin: Boolean
 });
 
 var User = mongoose.model('users', User_Schema);

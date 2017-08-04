@@ -10,17 +10,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by jack on 8/2/17.
  */
 var core_1 = require("@angular/core");
-var gatewayComponent = (function () {
-    function gatewayComponent() {
+var GatewayComponent = (function () {
+    function GatewayComponent() {
     }
-    gatewayComponent = __decorate([
+    GatewayComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'gateway',
             templateUrl: 'gateway.component.html',
         })
-    ], gatewayComponent);
-    return gatewayComponent;
+    ], GatewayComponent);
+    return GatewayComponent;
 }());
-exports.gatewayComponent = gatewayComponent;
+exports.GatewayComponent = GatewayComponent;
 //# sourceMappingURL=gateway.component.js.map

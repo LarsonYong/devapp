@@ -10,17 +10,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by jack on 8/2/17.
  */
 var core_1 = require("@angular/core");
-var detailsComponent = (function () {
-    function detailsComponent() {
+var DetailsComponent = (function () {
+    function DetailsComponent() {
     }
-    detailsComponent = __decorate([
+    DetailsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'details',
             templateUrl: 'details.component.html',
         })
-    ], detailsComponent);
-    return detailsComponent;
+    ], DetailsComponent);
+    return DetailsComponent;
 }());
-exports.detailsComponent = detailsComponent;
+exports.DetailsComponent = DetailsComponent;
 //# sourceMappingURL=details.component.js.map
