@@ -13,14 +13,17 @@ router.get('/',function(req,resp,next){
 });
 
 router.post('/users/authenticate',function (req,res,next) {
-    console.log(req.body);
     var requestbody = req.body;
-    var username = requestbody.Username;
-    var password = requestbody.Password;
+    var username = requestbody.username;
+    var password = requestbody.password;
     User.find({"Username":username}, function (err,data) {
-        res.send(data.Password);
+        console.log(req.body);
+        console.log(data);
         console.log('123');
+        console.log(data.Username);
         if( password === data.password){
+
+        }else{
 
         }
     })

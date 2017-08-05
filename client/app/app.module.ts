@@ -15,6 +15,8 @@ import { NavbarService} from "./services/navmenu.service"
 // import { LoginRouteGuard } from "./services/checklogin.service"
 import { LoginService} from "./services/login.service"
 import { LoginComponent} from "./components/login/login.component"
+import {AuthenticationService} from "./services/authentication.service"
+import {AlertService } from "./services/alert.service"
 @NgModule({
     declarations: [
         AppComponent,
@@ -30,6 +32,8 @@ import { LoginComponent} from "./components/login/login.component"
         AppServices,
         NavbarService,
         LoginService,
+        AuthenticationService,
+        AlertService
     ],
     imports: [
         BrowserModule,

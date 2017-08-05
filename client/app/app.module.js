@@ -23,6 +23,8 @@ var navmenu_service_1 = require("./services/navmenu.service");
 // import { LoginRouteGuard } from "./services/checklogin.service"
 var login_service_1 = require("./services/login.service");
 var login_component_1 = require("./components/login/login.component");
+var authentication_service_1 = require("./services/authentication.service");
+var alert_service_1 = require("./services/alert.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -42,6 +44,8 @@ var AppModule = (function () {
                 services_1.AppServices,
                 navmenu_service_1.NavbarService,
                 login_service_1.LoginService,
+                authentication_service_1.AuthenticationService,
+                alert_service_1.AlertService
             ],
             imports: [
                 platform_browser_1.BrowserModule,
