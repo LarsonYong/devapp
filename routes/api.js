@@ -17,14 +17,23 @@ router.post('/users/authenticate',function (req,res,next) {
     var username = requestbody.username;
     var password = requestbody.password;
     User.find({"Username":username}, function (err,data) {
-        console.log(req.body);
-        console.log(data);
-        console.log('123');
-        console.log(data.Username);
-        if( password === data.password){
-
+        if( password === data[0].Password){
+            res.send(data);
         }else{
+            res.status(401).json({message:'Username or Password is not correct'});
+        }
+    })
+});
 
+router.get('/getUser/',function (req,res,next) {
+    var username = req.body.username;
+    console.log(username);
+    User.find({"Username":username},function (err,data) {
+        console.log(data[0]);
+        if (data[0].Username === username){
+            res.send(data);
+        }else{
+            res.status(404).json({message:'User is not found'})
         }
     })
 });

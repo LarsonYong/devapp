@@ -7,7 +7,7 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a (click)="cliked()"  class='navbar-brand' id="menu-bttn">Menu</a>
+            <a  class='navbar-brand' id="menu-bttn">Menu</a>
         </div>
         <div class='clearfix'></div>
         <div class='navbar-collapse collapse'>
@@ -17,14 +17,20 @@
                         <span class='glyphicon glyphicon-home'></span> Home
                     </a>
                 </li>
-                <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/newUser']">
-                        <span class='glyphicon glyphicon-user'></span> New User
-                    </a>
-                </li>
+
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/gateway']">
                         <span class='glyphicon glyphicon-tasks'></span> Gateway
+                    </a>
+                </li>
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/userAdmin']">
+                        <span class='glyphicon glyphicon-user'></span>  User Admin
+                    </a>
+                </li>
+                <li>
+                    <a (click)="clicked()">
+                        <span class='glyphicon glyphicon-log-out'></span> Logout
                     </a>
                 </li>
             </ul>

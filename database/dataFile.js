@@ -15,7 +15,8 @@ var User_Schema = new Schema({
     Username: String,
     Skill: String,
     Project: String,
-    admin: Boolean
+    admin: Boolean,
+    Password:String
 });
 
 var User = mongoose.model('users', User_Schema);

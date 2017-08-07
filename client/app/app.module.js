@@ -13,7 +13,7 @@ var forms_1 = require("@angular/forms");
 var router_1 = require("@angular/router");
 var app_component_1 = require("./components/app/app.component");
 var navmenu_component_1 = require("./components/navmenu/navmenu.component");
-var newUser_component_1 = require("./components/newUser/newUser.component");
+var userAdmin_component_1 = require("./components/userAdmin/userAdmin.component");
 var home_component_1 = require("./components/home/home.component");
 var edit_component_1 = require("./components/edit/edit.component");
 var details_component_1 = require("./components/details/details.component");
@@ -25,6 +25,7 @@ var login_service_1 = require("./services/login.service");
 var login_component_1 = require("./components/login/login.component");
 var authentication_service_1 = require("./services/authentication.service");
 var alert_service_1 = require("./services/alert.service");
+var authGuard_service_1 = require("./services/authGuard.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,7 +34,7 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 navmenu_component_1.NavMenuComponent,
-                newUser_component_1.NewUserComponent,
+                userAdmin_component_1.UserAdminComponent,
                 home_component_1.HomeComponent,
                 edit_component_1.EditComponent,
                 details_component_1.DetailsComponent,
@@ -45,23 +46,34 @@ var AppModule = (function () {
                 navmenu_service_1.NavbarService,
                 login_service_1.LoginService,
                 authentication_service_1.AuthenticationService,
-                alert_service_1.AlertService
+                alert_service_1.AlertService,
+                authGuard_service_1.AuthenticationGuard,
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
-                    { path: '', redirectTo: 'home', pathMatch: 'full' },
+                    { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'login', component: login_component_1.LoginComponent },
-                    { path: 'home', component: home_component_1.HomeComponent },
-                    { path: 'details/:id', component: details_component_1.DetailsComponent },
-                    { path: 'newUser', component: newUser_component_1.NewUserComponent },
-                    { path: 'edit/:id', component: edit_component_1.EditComponent },
-                    { path: 'gateway', component: gateway_component_1.GatewayComponent },
-                    { path: '**', redirectTo: 'home' },
+                    { path: 'home', component: home_component_1.HomeComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'details/:id', component: details_component_1.DetailsComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'userAdmin', component: userAdmin_component_1.UserAdminComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'edit/:id', component: edit_component_1.EditComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'gateway', component: gateway_component_1.GatewayComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: '**', redirectTo: 'home', canActivate: [authGuard_service_1.AuthenticationGuard] },
                 ])
             ],
+            // RouterModule.forRoot([
+            //     {path:'',canActivate:[AuthenticationGuard],children:[
+            //         {path:'home',component:HomeComponent},
+            //         {path:'details/:id',component:DetailsComponent},
+            //         {path:'newUser',component:NewUserComponent},
+            //         {path:'edit/:id',component:EditComponent},
+            //         {path:'gateway',component:GatewayComponent},
+            //         {path:'**',redirectTo:'home'},
+            //     ]}
+            // ])],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

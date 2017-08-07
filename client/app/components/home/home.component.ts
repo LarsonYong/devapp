@@ -3,6 +3,8 @@
  */
 import { Component } from '@angular/core';
 import { AppServices } from "../../services/services"
+import { CanActivate } from '@angular/router';
+import {isloggedin} from "../../services/authentication.service";
 
 @Component({
     moduleId: module.id,
@@ -10,6 +12,9 @@ import { AppServices } from "../../services/services"
     templateUrl: 'home.component.html',
 
 })
+
+
+
 export class HomeComponent {
     public UserList = [];
     public constructor(private userService:AppServices){

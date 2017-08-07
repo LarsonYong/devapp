@@ -3,6 +3,8 @@
  */
 import { Component } from '@angular/core';
 import { NavbarService } from '../../services/navmenu.service'
+import {isloggedin,logout} from "../../services/authentication.service"
+import {Router} from "@angular/router"
 
 @Component({
     moduleId: module.id,
@@ -13,10 +15,16 @@ import { NavbarService } from '../../services/navmenu.service'
 })
 
 export class NavMenuComponent {
-    constructor(public nav: NavbarService){}
-    clicked(event){
-        const mm = document.getElementById('menu-bar');
-        const nm_width = document.getElementById('menu-bar');
-        mm.style.width = '10%';
+    constructor(
+        public nav: NavbarService,
+        private router: Router,
+    ){}
+     clicked(event){
+        let check_result = isloggedin();
+        if (check_result === true){
+            logout();
+            this.router.navigate(['login'])
+        }
     }
+
 }

@@ -10,27 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
- * Created by jack on 8/2/17.
+ * Created by jack on 8/5/17.
  */
 var core_1 = require("@angular/core");
-var services_1 = require("../../services/services");
-var DetailsComponent = (function () {
-    function DetailsComponent(userService) {
-        var _this = this;
-        this.userService = userService;
-        this.UserDetails = [];
-        this.userService.getUser(localStorage.getItem("UserDetails"))
-            .subscribe(function (data) { return (_this.UserDetails = data.json()); });
+var router_1 = require("@angular/router");
+var authentication_service_1 = require("./authentication.service");
+var AuthenticationGuard = (function () {
+    function AuthenticationGuard(router) {
+        this.router = router;
     }
-    DetailsComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'details',
-            templateUrl: 'details.component.html',
-        }),
-        __metadata("design:paramtypes", [services_1.AppServices])
-    ], DetailsComponent);
-    return DetailsComponent;
+    AuthenticationGuard.prototype.canActivate = function (route, state) {
+        if (authentication_service_1.isloggedin()) {
+            return true;
+        }
+        this.router.navigate(['/login']);
+        return;
+    };
+    AuthenticationGuard = __decorate([
+        core_1.Injectable(),
+        __metadata("design:paramtypes", [router_1.Router])
+    ], AuthenticationGuard);
+    return AuthenticationGuard;
 }());
-exports.DetailsComponent = DetailsComponent;
-//# sourceMappingURL=details.component.js.map
+exports.AuthenticationGuard = AuthenticationGuard;
+//# sourceMappingURL=authGuard.service.js.map

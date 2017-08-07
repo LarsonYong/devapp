@@ -16,14 +16,17 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var authentication_service_1 = require("../../services/authentication.service");
 var alert_service_1 = require("../../services/alert.service");
+var navmenu_service_1 = require("../../services/navmenu.service");
 var LoginComponent = (function () {
-    function LoginComponent(route, router, authenticationService, alertService) {
+    function LoginComponent(nav, route, router, authenticationService, alertService) {
+        this.nav = nav;
         this.route = route;
         this.router = router;
         this.authenticationService = authenticationService;
         this.alertService = alertService;
         this.model = {};
         this.loading = false;
+        nav.hide();
     }
     LoginComponent.prototype.ngOnInit = function () {
         // reset login status
@@ -47,7 +50,8 @@ var LoginComponent = (function () {
             moduleId: module.id,
             templateUrl: 'login.component.html'
         }),
-        __metadata("design:paramtypes", [router_1.ActivatedRoute,
+        __metadata("design:paramtypes", [navmenu_service_1.NavbarService,
+            router_1.ActivatedRoute,
             router_1.Router,
             authentication_service_1.AuthenticationService,
             alert_service_1.AlertService])

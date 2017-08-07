@@ -14,23 +14,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var services_1 = require("../../services/services");
-var DetailsComponent = (function () {
-    function DetailsComponent(userService) {
+var UserAdminComponent = (function () {
+    function UserAdminComponent(userService) {
         var _this = this;
         this.userService = userService;
-        this.UserDetails = [];
-        this.userService.getUser(localStorage.getItem("UserDetails"))
-            .subscribe(function (data) { return (_this.UserDetails = data.json()); });
+        this.UserList = [];
+        this.userService.getUserList()
+            .subscribe(function (data) { return (_this.UserList = data.json()); });
     }
-    DetailsComponent = __decorate([
+    UserAdminComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'details',
-            templateUrl: 'details.component.html',
+            selector: 'userAdmin',
+            templateUrl: 'userAdmin.component.html',
+            styleUrls: ['userAdmin.component.css'],
         }),
         __metadata("design:paramtypes", [services_1.AppServices])
-    ], DetailsComponent);
-    return DetailsComponent;
+    ], UserAdminComponent);
+    return UserAdminComponent;
 }());
-exports.DetailsComponent = DetailsComponent;
-//# sourceMappingURL=details.component.js.map
+exports.UserAdminComponent = UserAdminComponent;
+//# sourceMappingURL=userAdmin.component.js.map

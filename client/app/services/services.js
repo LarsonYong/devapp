@@ -21,6 +21,11 @@ var AppServices = (function () {
     AppServices.prototype.getUserList = function () {
         return this.http.get('http://localhost:4500/api');
     };
+    AppServices.prototype.getUser = function (username) {
+        var User = this.http.post('http://localhost:4500/api/getUser', { "Username": username });
+        localStorage.setItem('UserDetails', JSON.stringify(User));
+        return User;
+    };
     AppServices = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.Http])

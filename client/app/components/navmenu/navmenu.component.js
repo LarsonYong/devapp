@@ -14,14 +14,19 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var navmenu_service_1 = require("../../services/navmenu.service");
+var authentication_service_1 = require("../../services/authentication.service");
+var router_1 = require("@angular/router");
 var NavMenuComponent = (function () {
-    function NavMenuComponent(nav) {
+    function NavMenuComponent(nav, router) {
         this.nav = nav;
+        this.router = router;
     }
     NavMenuComponent.prototype.clicked = function (event) {
-        var mm = document.getElementById('menu-bar');
-        var nm_width = document.getElementById('menu-bar');
-        mm.style.width = '10%';
+        var check_result = authentication_service_1.isloggedin();
+        if (check_result === true) {
+            authentication_service_1.logout();
+            this.router.navigate(['login']);
+        }
     };
     NavMenuComponent = __decorate([
         core_1.Component({
@@ -30,7 +35,8 @@ var NavMenuComponent = (function () {
             templateUrl: 'navmenu.component.html',
             styleUrls: ['navmenu.component.css'],
         }),
-        __metadata("design:paramtypes", [navmenu_service_1.NavbarService])
+        __metadata("design:paramtypes", [navmenu_service_1.NavbarService,
+            router_1.Router])
     ], NavMenuComponent);
     return NavMenuComponent;
 }());

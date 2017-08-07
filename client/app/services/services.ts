@@ -13,4 +13,9 @@ export class AppServices {
     getUserList(){
         return this.http.get('http://localhost:4500/api');
     }
+    getUser(username){
+        const User =  this.http.post('http://localhost:4500/api/getUser',{"Username":username});
+        localStorage.setItem('UserDetails', JSON.stringify(User));
+        return User
+    }
 }

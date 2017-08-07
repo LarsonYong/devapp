@@ -6,16 +6,17 @@ import { AppServices } from "../../services/services"
 
 @Component({
     moduleId: module.id,
-    selector: 'details',
-    templateUrl: 'details.component.html',
+    selector: 'userAdmin',
+    templateUrl: 'userAdmin.component.html',
+    styleUrls: ['userAdmin.component.css'],
 
 })
-export class DetailsComponent {
-    public UserDetails = [];
+export class UserAdminComponent {
+    public UserList = [];
     public constructor(private userService:AppServices){
-        this.userService.getUser(localStorage.getItem("UserDetails"))
+        this.userService.getUserList()
             .subscribe(
-                (data) => (this.UserDetails = data.json())
+                (data) => (this.UserList = data.json())
             );
     }
 }

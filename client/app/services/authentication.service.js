@@ -24,7 +24,7 @@ var AuthenticationService = (function () {
             .map(function (response) {
             // login successful if there's a jwt token in the response
             var user = response.json();
-            if (user && user.token) {
+            if (user) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('currentUser', JSON.stringify(user));
             }
@@ -45,4 +45,12 @@ var AuthenticationService = (function () {
     return AuthenticationService;
 }());
 exports.AuthenticationService = AuthenticationService;
+function isloggedin() {
+    return !!localStorage.getItem('currentUser');
+}
+exports.isloggedin = isloggedin;
+function logout() {
+    localStorage.removeItem('currentUser');
+}
+exports.logout = logout;
 //# sourceMappingURL=authentication.service.js.map
