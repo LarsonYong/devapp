@@ -43,8 +43,8 @@
                 <td>{{userData.admin}}</td>
                 <td>{{userData.Password}}</td>
                 <td>
-                    <a [routerLink]="['/details/',userData._id]" class="btn btn-primary" (click)="getUser(userData.Username)">Detail</a>
-                    <a [routerLink]="['/edit/',userData._id]" class="btn btn-success">Edit</a>
+                    <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
+                    <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
                     <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
                 </td>
             </tr>

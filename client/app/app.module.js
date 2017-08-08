@@ -16,16 +16,16 @@ var navmenu_component_1 = require("./components/navmenu/navmenu.component");
 var userAdmin_component_1 = require("./components/userAdmin/userAdmin.component");
 var home_component_1 = require("./components/home/home.component");
 var edit_component_1 = require("./components/edit/edit.component");
-var details_component_1 = require("./components/details/details.component");
+var userDetails_component_1 = require("./components/userDetails/userDetails.component");
 var services_1 = require("./services/services");
 var gateway_component_1 = require("./components/gateway/gateway.component");
 var navmenu_service_1 = require("./services/navmenu.service");
-// import { LoginRouteGuard } from "./services/checklogin.service"
 var login_service_1 = require("./services/login.service");
 var login_component_1 = require("./components/login/login.component");
 var authentication_service_1 = require("./services/authentication.service");
 var alert_service_1 = require("./services/alert.service");
 var authGuard_service_1 = require("./services/authGuard.service");
+var http_2 = require("@angular/common/http");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,7 +37,7 @@ var AppModule = (function () {
                 userAdmin_component_1.UserAdminComponent,
                 home_component_1.HomeComponent,
                 edit_component_1.EditComponent,
-                details_component_1.DetailsComponent,
+                userDetails_component_1.DetailsComponent,
                 gateway_component_1.GatewayComponent,
                 login_component_1.LoginComponent
             ],
@@ -53,11 +53,12 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 forms_1.FormsModule,
+                http_2.HttpClientModule,
                 router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'login', component: login_component_1.LoginComponent },
                     { path: 'home', component: home_component_1.HomeComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
-                    { path: 'details/:id', component: details_component_1.DetailsComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'userDetails/:id', component: userDetails_component_1.DetailsComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'userAdmin', component: userAdmin_component_1.UserAdminComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'edit/:id', component: edit_component_1.EditComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'gateway', component: gateway_component_1.GatewayComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },

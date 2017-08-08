@@ -6,7 +6,7 @@ var router=express.Router();
 
 var User = require('../database/dataFile');
 
-router.get('/',function(req,resp,next){
+router.get('/getUserlist',function(req,resp,next){
     User.find({},function (err,docs) {
         resp.send(docs);
     })
@@ -25,12 +25,12 @@ router.post('/users/authenticate',function (req,res,next) {
     })
 });
 
-router.get('/getUser/',function (req,res,next) {
-    var username = req.body.username;
-    console.log(username);
+router.get('/getUser/:name',function (req,res,next) {
+    const username = req.params.name;
     User.find({"Username":username},function (err,data) {
-        console.log(data[0]);
-        if (data[0].Username === username){
+        console.log(data);
+        console.log(username);
+        if (data){
             res.send(data);
         }else{
             res.status(404).json({message:'User is not found'})
@@ -54,7 +54,14 @@ router.post('/register',function (req,res,next) {
 
 });
 
+router.post('/v5login',function (req,res,next) {
+   var username = req.body.username;
+   var password = req.body.password;
+   if (username || password){
 
+       console.log(res)
+   }
+});
 
 
 module.exports=router;

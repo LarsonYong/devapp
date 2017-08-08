@@ -19,10 +19,12 @@ var AppServices = (function () {
         this.http = http;
     }
     AppServices.prototype.getUserList = function () {
-        return this.http.get('http://localhost:4500/api');
+        return this.http.get('http://localhost:4500/api/getUserlist');
     };
     AppServices.prototype.getUser = function (username) {
-        var User = this.http.post('http://localhost:4500/api/getUser', { "Username": username });
+        var reqbody = 'http://localhost:4500/api/getUser/' + username;
+        console.log(reqbody);
+        var User = this.http.get('http://localhost:4500/api/getUser/' + username);
         localStorage.setItem('UserDetails', JSON.stringify(User));
         return User;
     };

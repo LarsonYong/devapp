@@ -13,28 +13,33 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by jack on 8/2/17.
  */
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/common/http");
-var GatewayComponent = (function () {
-    function GatewayComponent(http) {
-        this.http = http;
-        this.resStatus = [];
+var services_1 = require("../../services/services");
+var DetailsComponent = (function () {
+    function DetailsComponent(userService) {
+        this.userService = userService;
+        this.UserDetails = [];
     }
-    GatewayComponent.prototype.ngOnInit = function () {
+    DetailsComponent.prototype.ngOnInit = function () {
         var _this = this;
-        var body = { username: 'v5admin', password: 'v5admin123' };
-        this.http.post('/api/v5login', body).subscribe(function (data) { return (_this.resStatus = data.json()); });
+        var params = new URLSearchParams(document.location.search.substr(1));
+        var name = params.get("username");
+        if (name) {
+            console.log("Success");
+        }
+        else {
+            console.log("Not OK!");
+        }
+        this.userService.getUser(name).subscribe(function (data) { return (_this.UserDetails = data.json()); });
     };
-    GatewayComponent.prototype.login = function (event) {
-    };
-    GatewayComponent = __decorate([
+    DetailsComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'gateway',
-            templateUrl: 'gateway.component.html',
+            selector: 'userDetails',
+            templateUrl: 'userDetails.component.html',
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
-    ], GatewayComponent);
-    return GatewayComponent;
+        __metadata("design:paramtypes", [services_1.AppServices])
+    ], DetailsComponent);
+    return DetailsComponent;
 }());
-exports.GatewayComponent = GatewayComponent;
-//# sourceMappingURL=gateway.component.js.map
+exports.DetailsComponent = DetailsComponent;
+//# sourceMappingURL=userDetails.component.js.map

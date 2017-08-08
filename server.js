@@ -27,8 +27,8 @@ app.use(express.static(path.join(__dirname,'./client')));
 // The "urlEncoded" middle-ware is used to get the data from URL of the request.
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
-
-
+cors = require('./routes/cors.js');
+app.use(cors());
 app.use('/',index);
 app.use('/api/*',api);
 app.use('/api',api);

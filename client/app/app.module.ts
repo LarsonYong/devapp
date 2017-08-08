@@ -8,17 +8,18 @@ import { NavMenuComponent}  from './components/navmenu/navmenu.component';
 import { UserAdminComponent } from "./components/userAdmin/userAdmin.component";
 import { HomeComponent}  from "./components/home/home.component";
 import { EditComponent} from "./components/edit/edit.component";
-import { DetailsComponent} from "./components/details/details.component";
+import { DetailsComponent} from "./components/userDetails/userDetails.component";
 import { AppServices} from "./services/services"
 import { GatewayComponent } from "./components/gateway/gateway.component"
 import { NavbarService} from "./services/navmenu.service"
-// import { LoginRouteGuard } from "./services/checklogin.service"
 import { LoginService} from "./services/login.service"
 import { LoginComponent} from "./components/login/login.component"
 import {AuthenticationService} from "./services/authentication.service"
 import {AlertService } from "./services/alert.service"
 import {AuthenticationGuard} from "./services/authGuard.service"
+import {HttpClientModule} from '@angular/common/http';
 import {CanActivate} from "@angular/router"
+
 
 @NgModule({
     declarations: [
@@ -43,11 +44,12 @@ import {CanActivate} from "@angular/router"
         BrowserModule,
         HttpModule,
         FormsModule,
+        HttpClientModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full',canActivate:[AuthenticationGuard] },
             { path:'login', component: LoginComponent},
             { path: 'home', component: HomeComponent,canActivate:[AuthenticationGuard] },
-            { path: 'details/:id', component: DetailsComponent ,canActivate:[AuthenticationGuard] },
+            { path: 'userDetails/:id', component: DetailsComponent ,canActivate:[AuthenticationGuard] },
             { path: 'userAdmin', component: UserAdminComponent,canActivate:[AuthenticationGuard]  },
             { path: 'edit/:id', component: EditComponent ,canActivate:[AuthenticationGuard] },
             { path: 'gateway', component: GatewayComponent ,canActivate:[AuthenticationGuard] },
