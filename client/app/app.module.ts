@@ -17,7 +17,8 @@ import { LoginComponent} from "./components/login/login.component"
 import {AuthenticationService} from "./services/authentication.service"
 import {AlertService } from "./services/alert.service"
 import {AuthenticationGuard} from "./services/authGuard.service"
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientService} from "./services/Httpclient.service"
+// import {HttpClientModule} from '@angular/common/http';
 import {CanActivate} from "@angular/router"
 
 
@@ -39,12 +40,12 @@ import {CanActivate} from "@angular/router"
         AuthenticationService,
         AlertService,
         AuthenticationGuard,
+        HttpClientService
     ],
     imports: [
         BrowserModule,
         HttpModule,
         FormsModule,
-        HttpClientModule,
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full',canActivate:[AuthenticationGuard] },
             { path:'login', component: LoginComponent},
@@ -69,4 +70,5 @@ import {CanActivate} from "@angular/router"
 
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }

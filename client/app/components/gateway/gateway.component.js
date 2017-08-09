@@ -13,26 +13,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Created by jack on 8/2/17.
  */
 var core_1 = require("@angular/core");
-var http_1 = require("@angular/common/http");
+var http_1 = require("@angular/http");
+var Httpclient_service_1 = require("../../services/Httpclient.service");
+var options = new http_1.RequestOptions({
+    url: "http://devtest.v5systems.us",
+    body: {
+        "username": "v5admin",
+        "password": "v5admin123"
+    },
+    method: http_1.RequestMethod.Post,
+});
 var GatewayComponent = (function () {
-    function GatewayComponent(http) {
-        this.http = http;
-        this.resStatus = [];
-    }
-    GatewayComponent.prototype.ngOnInit = function () {
+    function GatewayComponent(httpclinetservice) {
         var _this = this;
-        var body = { username: 'v5admin', password: 'v5admin123' };
-        this.http.post('/api/v5login', body).subscribe(function (data) { return (_this.resStatus = data.json()); });
-    };
-    GatewayComponent.prototype.login = function (event) {
-    };
+        this.httpclinetservice = httpclinetservice;
+        this.posturl = 'http://10.70.32.60/4480';
+        this.body = {
+            "username": "v5admin123",
+            "password": "v5admin123"
+        };
+        this.ReqRsult = [];
+        this.httpclinetservice.post(this.posturl, this.body)
+            .subscribe(function (data) { return (_this.ReqRsult = data.json()); });
+    }
     GatewayComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'gateway',
             templateUrl: 'gateway.component.html',
         }),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [Httpclient_service_1.HttpClientService])
     ], GatewayComponent);
     return GatewayComponent;
 }());

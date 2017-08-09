@@ -8,5 +8,43 @@
         <div class="50_result" style="margin:2% 0 0 2%;height:80%; width: 80%; border: 1px solid;">Nothing</div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
 
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>UserName</th>
+                <th>Skill</th>
+                <th>Project</th>
+                <th>Admin</th>
+                <th>Password</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let userData of ReqRsult  ; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{ReqRsult.apiStatus}}</td>
+                <td>{{ReqRsult.Skill}}</td>
+                <td>{{ReqRsult.Project}}</td>
+                <td>{{ReqRsult.admin}}</td>
+                <td>{{ReqRsult.Password}}</td>
+                <td>
+                    <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
+                    <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
+                    <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
 <script> </script>

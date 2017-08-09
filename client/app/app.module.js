@@ -25,7 +25,7 @@ var login_component_1 = require("./components/login/login.component");
 var authentication_service_1 = require("./services/authentication.service");
 var alert_service_1 = require("./services/alert.service");
 var authGuard_service_1 = require("./services/authGuard.service");
-var http_2 = require("@angular/common/http");
+var Httpclient_service_1 = require("./services/Httpclient.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -48,12 +48,12 @@ var AppModule = (function () {
                 authentication_service_1.AuthenticationService,
                 alert_service_1.AlertService,
                 authGuard_service_1.AuthenticationGuard,
+                Httpclient_service_1.HttpClientService
             ],
             imports: [
                 platform_browser_1.BrowserModule,
                 http_1.HttpModule,
                 forms_1.FormsModule,
-                http_2.HttpClientModule,
                 router_1.RouterModule.forRoot([
                     { path: '', redirectTo: 'home', pathMatch: 'full', canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'login', component: login_component_1.LoginComponent },
