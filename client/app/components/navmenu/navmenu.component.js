@@ -23,10 +23,13 @@ var NavMenuComponent = (function () {
     }
     NavMenuComponent.prototype.clicked = function (event) {
         var check_result = authentication_service_1.isloggedin();
-        if (check_result === true) {
+        var result = confirm("Are you sure to logout?");
+        if (result && check_result === true) {
             authentication_service_1.logout();
             this.router.navigate(['login']);
         }
+    };
+    NavMenuComponent.prototype.getActived = function () {
     };
     NavMenuComponent = __decorate([
         core_1.Component({

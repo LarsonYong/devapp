@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/userAdmin']">
+                    <a [routerLink]="['/userAdmin']" [ngClass]="getActived()">
                         <span class='glyphicon glyphicon-user'></span>  User Admin
                     </a>
                 </li>

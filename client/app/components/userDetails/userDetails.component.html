@@ -1,11 +1,23 @@
+<div class="page-header" style="margin-right: 10%;border-bottom: solid #FFFFFF">
+    <h2> User Details</h2>
+</div>
+<ul class="nav nav-pills" style="border-bottom: 3px solid #eee; margin-right:9%" role="tablist">
+    <li role="presentation" class="active">
+        <a href="#"> User details </a>
+    </li>
+    <li role="presentation"  [routerLinkActive]="['link-active']">
+        <a [routerLink]="['/editUser']" href=""> Edit user </a>
+    </li>
+</ul>
+
 <div class="row">
     <div class="col-md-12">
-        <h3>User Detail</h3>
+
         <br />
     </div>
 </div>
 <div class="row">
-    <div class="table-responsive">
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
         <table class="table">
             <thead>
             <tr>
@@ -26,7 +38,6 @@
                 <td>{{userData.Project}}</td>
                 <td>{{userData.admin}}</td>
                 <td>{{userData.Password}}</td>
-
             </tr>
 
         </table>

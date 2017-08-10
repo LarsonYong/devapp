@@ -9,6 +9,7 @@ import { UserAdminComponent } from "./components/userAdmin/userAdmin.component";
 import { HomeComponent}  from "./components/home/home.component";
 import { EditComponent} from "./components/edit/edit.component";
 import { DetailsComponent} from "./components/userDetails/userDetails.component";
+import { AddUserComponent} from "./components/addUser/addUser.component"
 import { AppServices} from "./services/services"
 import { GatewayComponent } from "./components/gateway/gateway.component"
 import { NavbarService} from "./services/navmenu.service"
@@ -18,6 +19,7 @@ import {AuthenticationService} from "./services/authentication.service"
 import {AlertService } from "./services/alert.service"
 import {AuthenticationGuard} from "./services/authGuard.service"
 import {HttpClientService} from "./services/Httpclient.service"
+import { SearchUserComponent} from "./components/searchUser/searchUser.component"
 // import {HttpClientModule} from '@angular/common/http';
 import {CanActivate} from "@angular/router"
 
@@ -31,7 +33,9 @@ import {CanActivate} from "@angular/router"
         EditComponent,
         DetailsComponent,
         GatewayComponent,
-        LoginComponent
+        LoginComponent,
+        AddUserComponent,
+        SearchUserComponent
     ],
     providers: [
         AppServices,
@@ -51,11 +55,12 @@ import {CanActivate} from "@angular/router"
             { path:'login', component: LoginComponent},
             { path: 'home', component: HomeComponent,canActivate:[AuthenticationGuard] },
             { path: 'userDetails/:id', component: DetailsComponent ,canActivate:[AuthenticationGuard] },
-            { path: 'userAdmin', component: UserAdminComponent,canActivate:[AuthenticationGuard]  },
+            { path: 'userAdmin', component: UserAdminComponent, canActivate: [AuthenticationGuard]},
             { path: 'edit/:id', component: EditComponent ,canActivate:[AuthenticationGuard] },
             { path: 'gateway', component: GatewayComponent ,canActivate:[AuthenticationGuard] },
+            { path: 'addUser', component: AddUserComponent, canActivate:[AuthenticationGuard]},
+            { path: 'searchUser', component: SearchUserComponent, canActivate:[AuthenticationGuard]},
             { path: '**', redirectTo: 'home',canActivate:[AuthenticationGuard]  },
-
         ])],
         // RouterModule.forRoot([
         //     {path:'',canActivate:[AuthenticationGuard],children:[

@@ -22,6 +22,9 @@ var UserAdminComponent = (function () {
         this.userService.getUserList()
             .subscribe(function (data) { return (_this.UserList = data.json()); });
     }
+    UserAdminComponent.prototype.deleteUser = function (username) {
+        var result = confirm("Are you sure to delete?");
+    };
     UserAdminComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

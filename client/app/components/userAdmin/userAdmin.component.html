@@ -2,20 +2,19 @@
     <h2> User Admin</h2>
 </div>
 <ul class="nav nav-pills" style="border-bottom: 3px solid #eee; margin-right:9%" role="tablist">
-    <li role="presentation" class="active">
-        <a href="#">User list</a>
+    <li role="presentation" class="active" [routerLinkActive]="['link-active']">
+        <a [routerLink]="['/userAdmin']">User list</a>
     </li>
-    <li role="presentation" >
-        <a href="#"> Add user</a>
+    <li role="presentation" [routerLinkActive]="['link-active']">
+        <a  [routerLink]="['/addUser']" > Add user</a>
     </li>
-    <li role="presentation" >
-        <a href="#"> User search</a>
+    <li role="presentation" [routerLinkActive]="['link-active']" >
+        <a  [routerLink]="['/searchUser']" > Search</a>
     </li>
 
 </ul>
 <div class="row">
     <div class="col-md-12">
-
         <br />
     </div>
 </div>
@@ -45,7 +44,7 @@
                 <td>
                     <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
                     <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
-                    <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
+                    <a class="btn btn-danger" (click)="deleteUser(userData.Username)">Delete</a>
                 </td>
             </tr>
 

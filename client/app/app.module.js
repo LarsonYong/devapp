@@ -17,6 +17,7 @@ var userAdmin_component_1 = require("./components/userAdmin/userAdmin.component"
 var home_component_1 = require("./components/home/home.component");
 var edit_component_1 = require("./components/edit/edit.component");
 var userDetails_component_1 = require("./components/userDetails/userDetails.component");
+var addUser_component_1 = require("./components/addUser/addUser.component");
 var services_1 = require("./services/services");
 var gateway_component_1 = require("./components/gateway/gateway.component");
 var navmenu_service_1 = require("./services/navmenu.service");
@@ -26,6 +27,7 @@ var authentication_service_1 = require("./services/authentication.service");
 var alert_service_1 = require("./services/alert.service");
 var authGuard_service_1 = require("./services/authGuard.service");
 var Httpclient_service_1 = require("./services/Httpclient.service");
+var searchUser_component_1 = require("./components/searchUser/searchUser.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +41,9 @@ var AppModule = (function () {
                 edit_component_1.EditComponent,
                 userDetails_component_1.DetailsComponent,
                 gateway_component_1.GatewayComponent,
-                login_component_1.LoginComponent
+                login_component_1.LoginComponent,
+                addUser_component_1.AddUserComponent,
+                searchUser_component_1.SearchUserComponent
             ],
             providers: [
                 services_1.AppServices,
@@ -62,6 +66,8 @@ var AppModule = (function () {
                     { path: 'userAdmin', component: userAdmin_component_1.UserAdminComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'edit/:id', component: edit_component_1.EditComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: 'gateway', component: gateway_component_1.GatewayComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'addUser', component: addUser_component_1.AddUserComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
+                    { path: 'searchUser', component: searchUser_component_1.SearchUserComponent, canActivate: [authGuard_service_1.AuthenticationGuard] },
                     { path: '**', redirectTo: 'home', canActivate: [authGuard_service_1.AuthenticationGuard] },
                 ])
             ],

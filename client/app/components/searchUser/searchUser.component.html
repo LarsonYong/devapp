@@ -1,0 +1,15 @@
+<div class="page-header" style="margin-right: 10%;border-bottom: solid #FFFFFF">
+    <h2> User Admin</h2>
+</div>
+<ul class="nav nav-pills" style="border-bottom: 3px solid #eee; margin-right:9%" role="tablist">
+    <li role="presentation" [routerLinkActive]="['link-active']">
+        <a [routerLink]="['/userAdmin']">User list</a>
+    </li>
+    <li role="presentation" [routerLinkActive]="['link-active']" >
+        <a [routerLink]="['/addUser']" > Add user</a>
+    </li>
+    <li role="presentation" [routerLinkActive]="['link-active']"  class="active">
+        <a [routerLink]="['/searchUser']" > Search</a>
+    </li>
+</ul>
+<h2> This is User search page</h2>

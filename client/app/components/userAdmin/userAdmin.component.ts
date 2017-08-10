@@ -19,4 +19,8 @@ export class UserAdminComponent {
                 (data) => (this.UserList = data.json())
             );
     }
+    deleteUser(username){
+        const result = confirm("Are you sure to delete?")
+
+    }
 }

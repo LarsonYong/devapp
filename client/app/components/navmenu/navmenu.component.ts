@@ -19,12 +19,16 @@ export class NavMenuComponent {
         public nav: NavbarService,
         private router: Router,
     ){}
-     clicked(event){
+    clicked(event){
         let check_result = isloggedin();
-        if (check_result === true){
+        const result = confirm("Are you sure to logout?");
+        if(result && check_result === true){
             logout();
             this.router.navigate(['login'])
+            }
         }
+    getActived(){
+
+    }
     }
 
-}
