@@ -2,14 +2,14 @@
     <h2> User Admin</h2>
 </div>
 <ul class="nav nav-pills" style="border-bottom: 3px solid #eee; margin-right:9%" role="tablist">
-    <li role="presentation" class="active" [routerLinkActive]="['link-active']">
-        <a [routerLink]="['/userAdmin']">User list</a>
+    <li id="userlistbttn" class="active" >
+        <a (click)="showuserlist()">User list</a>
     </li>
-    <li role="presentation" [routerLinkActive]="['link-active']">
-        <a  [routerLink]="['/addUser']" > Add user</a>
+    <li id="adduserbttn"  role="presentation" >
+        <a  (click)="showadduser()" > Add user</a>
     </li>
-    <li role="presentation" [routerLinkActive]="['link-active']" >
-        <a  [routerLink]="['/searchUser']" > Search</a>
+    <li id="searchbttn"  role="presentation"  >
+        <a  (click)="showsearch()" > Search</a>
     </li>
 
 </ul>
@@ -18,7 +18,7 @@
         <br />
     </div>
 </div>
-<div class="row">
+<div class="row active" id="userlist" >
     <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
         <table class="table">
             <thead>
@@ -50,4 +50,28 @@
 
         </table>
     </div>
+</div>
+<div class="row hidden" id="adduser" style="margin-left: 1%; margin-right: 10%; width: 25%;">
+    <form >
+        <div id="div_username" class="form-group required" >
+            <label >Username</label>
+            <input type="text" class="form-control" placeholder="username">
+        </div>
+    </form>
+    <form >
+        <div id="div_password" class="form-group required" >
+            <label >Password</label>
+            <input type="text" class="form-control" placeholder="password">
+        </div>
+    </form>
+    <button type="button" class=" btn btn-info" style="float: right; margin-bottom: 2%">Submit</button>
+</div>
+<div class="row hidden " id="searchuser" style="margin-top: 1% ;margin-left: 1%; margin-right: 10%; width:35%">
+    <form class="form-inline" style="display: inline;position: relative;">
+        <div id="search_username" class="form-group required" >
+            <label class="sr-only">Please enter in username</label>
+            <input type="text" class="form-control" placeholder="Username">
+        </div>
+        <button type="button" class=" btn btn-info" style="">Search</button>
+    </form>
 </div>

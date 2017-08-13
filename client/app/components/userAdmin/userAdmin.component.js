@@ -19,10 +19,46 @@ var UserAdminComponent = (function () {
         var _this = this;
         this.userService = userService;
         this.UserList = [];
+        this.location = '';
+        this.UserDetails = [];
         this.userService.getUserList()
             .subscribe(function (data) { return (_this.UserList = data.json()); });
     }
-    UserAdminComponent.prototype.deleteUser = function (username) {
+    UserAdminComponent.prototype.showuserlist = function () {
+        document.getElementById('userlistbttn').classList.add('active');
+        document.getElementById('adduserbttn').classList.remove('active');
+        document.getElementById('searchbttn').classList.remove('active');
+        document.getElementById('userlist').classList.add('active');
+        document.getElementById('userlist').classList.remove('hidden');
+        document.getElementById('adduser').classList.remove('active');
+        document.getElementById('adduser').classList.add('hidden');
+        document.getElementById('searchuser').classList.remove('active');
+        document.getElementById('searchuser').classList.add('hidden');
+    };
+    ;
+    UserAdminComponent.prototype.showadduser = function () {
+        document.getElementById('userlistbttn').classList.remove('active');
+        document.getElementById('adduserbttn').classList.add('active');
+        document.getElementById('searchbttn').classList.remove('active');
+        document.getElementById('adduser').classList.add('active');
+        document.getElementById('adduser').classList.remove('hidden');
+        document.getElementById('userlist').classList.remove('active');
+        document.getElementById('userlist').classList.add('hidden');
+        document.getElementById('searchuser').classList.remove('active');
+        document.getElementById('searchuser').classList.add('hidden');
+    };
+    UserAdminComponent.prototype.showsearch = function () {
+        document.getElementById('userlistbttn').classList.remove('active');
+        document.getElementById('adduserbttn').classList.remove('active');
+        document.getElementById('searchbttn').classList.add('active');
+        document.getElementById('searchuser').classList.add('active');
+        document.getElementById('searchuser').classList.remove('hidden');
+        document.getElementById('userlist').classList.remove('active');
+        document.getElementById('userlist').classList.add('hidden');
+        document.getElementById('adduser').classList.remove('active');
+        document.getElementById('adduser').classList.add('hidden');
+    };
+    UserAdminComponent.deleteUser = function (username) {
         var result = confirm("Are you sure to delete?");
     };
     UserAdminComponent = __decorate([
