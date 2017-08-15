@@ -28,6 +28,7 @@ var alert_service_1 = require("./services/alert.service");
 var authGuard_service_1 = require("./services/authGuard.service");
 var Httpclient_service_1 = require("./services/Httpclient.service");
 var searchUser_component_1 = require("./components/searchUser/searchUser.component");
+var dummy_component_1 = require("./components/dummy/dummy.component");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -43,7 +44,8 @@ var AppModule = (function () {
                 gateway_component_1.GatewayComponent,
                 login_component_1.LoginComponent,
                 addUser_component_1.AddUserComponent,
-                searchUser_component_1.SearchUserComponent
+                searchUser_component_1.SearchUserComponent,
+                dummy_component_1.DummyComponent
             ],
             providers: [
                 services_1.AppServices,

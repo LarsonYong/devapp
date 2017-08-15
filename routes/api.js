@@ -45,7 +45,8 @@ router.get('/getUser/:name',function (req,res,next) {
         console.log(username);
         if (data){
             res.send(data);
-            console.log("User found")
+            console.log("User found");
+            console.log(data)
         }else{
             res.status(404).json({message:'User is not found'});
             console.log("User not found")
@@ -105,7 +106,7 @@ router.post('/user/delete',function (req,res) {
     //         console.log("Connected!")
     //     }
     // });
-    if (User.find({"Username":username})){
+    if (data){
         User.find({"Username":username}).remove().exec();
         res.send("User removed");
         console.log("User removed")

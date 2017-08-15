@@ -16,11 +16,17 @@ var core_1 = require("@angular/core");
 var navmenu_service_1 = require("../../services/navmenu.service");
 var authentication_service_1 = require("../../services/authentication.service");
 var router_1 = require("@angular/router");
+var common_1 = require("@angular/common");
 var NavMenuComponent = (function () {
-    function NavMenuComponent(nav, router) {
+    function NavMenuComponent(nav, router, location) {
         this.nav = nav;
         this.router = router;
+        this.location = location;
     }
+    NavMenuComponent.prototype.isHiden = function () {
+        var list = ["/login"], route = this.location.path();
+        return (list.indexOf(route) > -1);
+    };
     NavMenuComponent.prototype.clicked = function (event) {
         var check_result = authentication_service_1.isloggedin();
         var result = confirm("Are you sure to logout?");
@@ -39,7 +45,8 @@ var NavMenuComponent = (function () {
             styleUrls: ['navmenu.component.css'],
         }),
         __metadata("design:paramtypes", [navmenu_service_1.NavbarService,
-            router_1.Router])
+            router_1.Router,
+            common_1.Location])
     ], NavMenuComponent);
     return NavMenuComponent;
 }());

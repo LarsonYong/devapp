@@ -20,6 +20,7 @@ import {AlertService } from "./services/alert.service"
 import {AuthenticationGuard} from "./services/authGuard.service"
 import {HttpClientService} from "./services/Httpclient.service"
 import { SearchUserComponent} from "./components/searchUser/searchUser.component"
+import {DummyComponent} from "./components/dummy/dummy.component"
 // import {HttpClientModule} from '@angular/common/http';
 import {CanActivate} from "@angular/router"
 
@@ -35,7 +36,8 @@ import {CanActivate} from "@angular/router"
         GatewayComponent,
         LoginComponent,
         AddUserComponent,
-        SearchUserComponent
+        SearchUserComponent,
+        DummyComponent
     ],
     providers: [
         AppServices,

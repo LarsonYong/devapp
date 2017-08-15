@@ -14,17 +14,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var core_1 = require("@angular/core");
 var services_1 = require("../../services/services");
+var router_1 = require("@angular/router");
+var user_1 = require("./user");
+var http_1 = require("@angular/http");
+var alert_service_1 = require("../../services/alert.service");
 var UserAdminComponent = (function () {
-    function UserAdminComponent(userService) {
+    function UserAdminComponent(userService, alertService, http, router) {
         var _this = this;
         this.userService = userService;
+        this.alertService = alertService;
+        this.http = http;
+        this.router = router;
         this.UserList = [];
         this.location = '';
+        this.model = new user_1.User('', '', '', '', false);
         this.UserDetails = [];
+        this.UserSearchDeatails = [];
+        this.submitted = false;
+        this.searched = false;
         this.userService.getUserList()
             .subscribe(function (data) { return (_this.UserList = data.json()); });
+        console.log("submitted: " + this.submitted);
     }
     UserAdminComponent.prototype.showuserlist = function () {
+        var _this = this;
         document.getElementById('userlistbttn').classList.add('active');
         document.getElementById('adduserbttn').classList.remove('active');
         document.getElementById('searchbttn').classList.remove('active');
@@ -34,6 +47,7 @@ var UserAdminComponent = (function () {
         document.getElementById('adduser').classList.add('hidden');
         document.getElementById('searchuser').classList.remove('active');
         document.getElementById('searchuser').classList.add('hidden');
+        this.userService.getUserList().subscribe(function (data) { return (_this.UserList = data.json()); });
     };
     ;
     UserAdminComponent.prototype.showadduser = function () {
@@ -46,6 +60,7 @@ var UserAdminComponent = (function () {
         document.getElementById('userlist').classList.add('hidden');
         document.getElementById('searchuser').classList.remove('active');
         document.getElementById('searchuser').classList.add('hidden');
+        this.submitted = false;
     };
     UserAdminComponent.prototype.showsearch = function () {
         document.getElementById('userlistbttn').classList.remove('active');
@@ -57,9 +72,51 @@ var UserAdminComponent = (function () {
         document.getElementById('userlist').classList.add('hidden');
         document.getElementById('adduser').classList.remove('active');
         document.getElementById('adduser').classList.add('hidden');
+        this.searched = false;
     };
+    Object.defineProperty(UserAdminComponent.prototype, "diagnostic", {
+        get: function () { return JSON.stringify(this.model); },
+        enumerable: true,
+        configurable: true
+    });
     UserAdminComponent.deleteUser = function (username) {
         var result = confirm("Are you sure to delete?");
+    };
+    UserAdminComponent.prototype.adduserclicked = function (username, password) {
+        this.submitted = true;
+        console.log("submitted: " + this.submitted);
+        this.addUser(username, password);
+    };
+    UserAdminComponent.prototype.addUser = function (username, password) {
+        this.http.post('api/user/add', {
+            "username": username,
+            "password": password
+        }).subscribe(function (data) {
+            console.log(data);
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    UserAdminComponent.prototype.deleteUser = function (username) {
+        var _this = this;
+        var result = confirm("Delete user: " + username + "?");
+        this.http.post('api/user/delete', {
+            "username": username
+        }).subscribe(function (data) {
+            console.log(data);
+            _this.userService.getUserList().subscribe(function (data) { return (_this.UserList = data.json()); });
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    UserAdminComponent.prototype.searchuserclick = function (username) {
+        var _this = this;
+        console.log("Search: " + username);
+        console.log('api/getUser/' + username);
+        this.http.get('api/getUser/' + username)
+            .subscribe(function (data) { return (_this.UserSearchDeatails = data.json()); });
+        console.log(this.UserSearchDeatails);
+        this.searched = true;
     };
     UserAdminComponent = __decorate([
         core_1.Component({
@@ -68,7 +125,10 @@ var UserAdminComponent = (function () {
             templateUrl: 'userAdmin.component.html',
             styleUrls: ['userAdmin.component.css'],
         }),
-        __metadata("design:paramtypes", [services_1.AppServices])
+        __metadata("design:paramtypes", [services_1.AppServices,
+            alert_service_1.AlertService,
+            http_1.Http,
+            router_1.Router])
     ], UserAdminComponent);
     return UserAdminComponent;
 }());
