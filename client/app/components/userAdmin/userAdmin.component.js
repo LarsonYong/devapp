@@ -25,6 +25,7 @@ var UserAdminComponent = (function () {
         this.alertService = alertService;
         this.http = http;
         this.router = router;
+        this.message = '';
         this.UserList = [];
         this.location = '';
         this.model = new user_1.User('', '', '', '', false);
@@ -32,6 +33,8 @@ var UserAdminComponent = (function () {
         this.UserSearchDeatails = [];
         this.submitted = false;
         this.searched = false;
+        this.showalert = false;
+        this.showsuccess = false;
         this.userService.getUserList()
             .subscribe(function (data) { return (_this.UserList = data.json()); });
         console.log("submitted: " + this.submitted);
@@ -48,6 +51,9 @@ var UserAdminComponent = (function () {
         document.getElementById('searchuser').classList.remove('active');
         document.getElementById('searchuser').classList.add('hidden');
         this.userService.getUserList().subscribe(function (data) { return (_this.UserList = data.json()); });
+        this.submitted = false;
+        this.showsuccess = false;
+        this.showalert = false;
     };
     ;
     UserAdminComponent.prototype.showadduser = function () {
@@ -61,6 +67,8 @@ var UserAdminComponent = (function () {
         document.getElementById('searchuser').classList.remove('active');
         document.getElementById('searchuser').classList.add('hidden');
         this.submitted = false;
+        this.showsuccess = false;
+        this.showalert = false;
     };
     UserAdminComponent.prototype.showsearch = function () {
         document.getElementById('userlistbttn').classList.remove('active');
@@ -73,29 +81,47 @@ var UserAdminComponent = (function () {
         document.getElementById('adduser').classList.remove('active');
         document.getElementById('adduser').classList.add('hidden');
         this.searched = false;
+        this.submitted = false;
+        this.showsuccess = false;
+        this.showalert = false;
     };
     Object.defineProperty(UserAdminComponent.prototype, "diagnostic", {
         get: function () { return JSON.stringify(this.model); },
         enumerable: true,
         configurable: true
     });
-    UserAdminComponent.deleteUser = function (username) {
-        var result = confirm("Are you sure to delete?");
-    };
     UserAdminComponent.prototype.adduserclicked = function (username, password) {
         this.submitted = true;
         console.log("submitted: " + this.submitted);
         this.addUser(username, password);
     };
     UserAdminComponent.prototype.addUser = function (username, password) {
+        var _this = this;
         this.http.post('api/user/add', {
             "username": username,
             "password": password
-        }).subscribe(function (data) {
-            console.log(data);
-        }, function (err) {
-            console.log(err);
-        });
+        }).map(function (res) {
+            if (res.status == 406) {
+                throw new Error('User already exist. ' + res.status);
+            }
+            else if (res.status < 200 || res.status >= 300) {
+                throw new Error('This request failed. ' + res.status);
+            }
+            else {
+                if (res.json().status == 406) {
+                    _this.showalert = true;
+                    _this.message = res.json().message;
+                    console.log("1111");
+                    console.log(_this.message);
+                }
+                else {
+                    _this.showalert = false;
+                    _this.showsuccess = true;
+                    _this.message = res.json().message;
+                }
+            }
+        })
+            .subscribe(function (data) { return console.log(data); });
     };
     UserAdminComponent.prototype.deleteUser = function (username) {
         var _this = this;
@@ -105,18 +131,30 @@ var UserAdminComponent = (function () {
         }).subscribe(function (data) {
             console.log(data);
             _this.userService.getUserList().subscribe(function (data) { return (_this.UserList = data.json()); });
+            _this.showsuccess = true;
+            _this.message = "Success delete user";
         }, function (err) {
             console.log(err);
+            _this.alertService.error("User exists!");
         });
     };
     UserAdminComponent.prototype.searchuserclick = function (username) {
         var _this = this;
-        console.log("Search: " + username);
-        console.log('api/getUser/' + username);
         this.http.get('api/getUser/' + username)
-            .subscribe(function (data) { return (_this.UserSearchDeatails = data.json()); });
+            .map(function (res) {
+            if (res.json().status == 404) {
+                _this.showalert = true;
+                _this.searched = false;
+                _this.message = "User not exist";
+            }
+            else {
+                _this.showalert = false;
+                _this.searched = true;
+                return res.json();
+            }
+        }).subscribe(function (data) { return (_this.UserSearchDeatails = data); });
+        console.log("1111");
         console.log(this.UserSearchDeatails);
-        this.searched = true;
     };
     UserAdminComponent = __decorate([
         core_1.Component({

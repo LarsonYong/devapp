@@ -9,6 +9,9 @@ var mongoose = require('mongoose');
 // Connection URL
 var db = 'mongodb://localhost:27017/userDetails';
 var User = require('../database/dataFile');
+var app = express();
+var bodyParser = require('body-parser');
+var request = require('request');
 
 
 // Get user list
@@ -43,12 +46,12 @@ router.get('/getUser/:name',function (req,res,next) {
     User.find({"Username":username},function (err,data) {
         console.log(data);
         console.log(username);
-        if (data){
-            res.send(data);
+        if (data.length > 0){
+            res.json(data);
             console.log("User found");
             console.log(data)
         }else{
-            res.status(404).json({message:'User is not found'});
+            res.json({"status":"404","message":'User is not found'});
             console.log("User not found")
         }
     })
@@ -73,15 +76,15 @@ router.post('/user/add',function (req,res,next) {
     User.count({"Username":username},function (err,data) {
         // console.log(data[0].Username);
         if(data > 0){
-            res.send("User already exist");
-            console.log("User already exist")
+            res.json({"status":"406","message":"User name already exist"});
+            console.log("User already exist");
         }else{
             user.save(function (err) {
                 if(err){
                     res.send(err);
                     console.log(err)
                 }else{
-                    res.send("User added");
+                    res.json({"status":"202","message":"Success!"});
                     console.log("User added")
                 }
             });
@@ -106,7 +109,7 @@ router.post('/user/delete',function (req,res) {
     //         console.log("Connected!")
     //     }
     // });
-    if (data){
+    if (User.find({"Username":username})){
         User.find({"Username":username}).remove().exec();
         res.send("User removed");
         console.log("User removed")
@@ -139,54 +142,69 @@ router.post('/register',function (req,res,next) {
 router.post('/v5login',function (req,res,next) {
     var username = req.body.username;
     var password = req.body.password;
-    const postData = querystring.stringify({
-        'username': username,
-        'password': password
-    });
-    const options = {
-        hostname: 'http://10.70.32.60',
-        port: '4480',
-        path: 'http://10.70.32.60:4480/api/units/getAllConnectedUnits',
-        method: 'GET',
-        headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "X-Requested-With"
-        }
-    };
-    this.getJSON(options,function (statusCode,result) {
-        console.log("onResult: (" + statusCode + ")" + JSON.stringify(result));
-        res.statusCode = statusCode;
-        res.send(JSON.stringify(result));
-    })
+    request.post(
+        'http://10.70.32.60:4480/api/login', {
+            form:{
+                username:username,
+                password:password
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
 
+                console.log(body);
+                res.send(body)
+            }
+            console.log("req.body   ");
+            console.log(req.body.username);
+            console.log(req.body.password)
+        }
+    );
 });
 
-exports.getJSON = function(options, onResult)
-{
-    console.log("rest::getJSON");
 
-    var port = options.port ;
-    var req = port.request(options, function(res)
-    {
-        var output = '';
-        console.log(options.host + ':' + res.statusCode);
-        res.setEncoding('utf8');
+// Get all connected units
+router.get('/v5allconnect',function (req,res,next) {
+    request.get(
+        'http://10.70.32.60:4480/api/units/getAllConnectedUnits',
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
 
-        res.on('data', function (chunk) {
-            output += chunk;
-        });
+                console.log(body);
+                res.send(body)
+            }
+            console.log("req.body   ");
+        }
+    );
+});
 
-        res.on('end', function() {
-            var obj = JSON.parse(output);
-            onResult(res.statusCode, obj);
-        });
-    });
 
-    req.on('error', function(err) {
-        //res.send('error: ' + err.message);
-    });
-
-    req.end();
-};
+// exports.getJSON = function(options, onResult)
+// {
+//     console.log("rest::getJSON");
+//
+//     var port = options.port ;
+//     var req = port.request(options, function(res)
+//     {
+//         var output = '';
+//         console.log(options.host + ':' + res.statusCode);
+//         res.setEncoding('utf8');
+//
+//         res.on('data', function (chunk) {
+//             output += chunk;
+//         });
+//
+//         res.on('end', function() {
+//             var obj = JSON.parse(output);
+//             onResult(res.statusCode, obj);
+//         });
+//     });
+//
+//     req.on('error', function(err) {
+//         //res.send('error: ' + err.message);
+//     });
+//
+//     req.end();
+// };
 
 module.exports=router;

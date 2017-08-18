@@ -8,6 +8,7 @@ import {User} from './user'
 import { Http, Headers, Response,RequestOptions, URLSearchParams } from '@angular/http';
 import {AlertService} from '../../services/alert.service'
 import {NgForm} from '@angular/forms'
+import {overrideProvider} from "@angular/core/src/view";
 
 @Component({
     moduleId: module.id,
@@ -17,6 +18,7 @@ import {NgForm} from '@angular/forms'
 
 })
 export class UserAdminComponent {
+    message = '';
     public UserList = [];
     public location = '';
     model = new User('','','','',false);
@@ -45,7 +47,9 @@ export class UserAdminComponent {
       document.getElementById('searchuser').classList.remove('active');
       document.getElementById('searchuser').classList.add('hidden');
       this.userService.getUserList().subscribe((data) => (this.UserList = data.json()));
-
+      this.submitted = false;
+      this.showsuccess =false;
+      this.showalert = false
     };
     showadduser(){
         document.getElementById('userlistbttn').classList.remove('active');
@@ -58,6 +62,8 @@ export class UserAdminComponent {
         document.getElementById('searchuser').classList.remove('active');
         document.getElementById('searchuser').classList.add('hidden');
         this.submitted = false;
+        this.showsuccess =false;
+        this.showalert = false
     }
     showsearch(){
         document.getElementById('userlistbttn').classList.remove('active');
@@ -70,13 +76,15 @@ export class UserAdminComponent {
         document.getElementById('adduser').classList.remove('active');
         document.getElementById('adduser').classList.add('hidden');
         this.searched = false;
+        this.submitted = false;
+        this.showsuccess =false;
+        this.showalert = false
     }
     submitted = false;
     searched = false;
+    showalert = false;
+    showsuccess = false;
     get diagnostic() { return JSON.stringify(this.model); }
-    static deleteUser(username){
-        const result = confirm("Are you sure to delete?")
-    }
 
     adduserclicked(username,password){
         this.submitted = true;
@@ -86,13 +94,32 @@ export class UserAdminComponent {
 
     addUser(username,password){
         this.http.post('api/user/add',{
-            "username": username,
-            "password":password
-        }).subscribe(data =>{
-                console.log(data)
-            },err=>{
-            console.log(err)
+                 "username": username,
+                 "password":password}
+                 ).map(res =>{
+
+                     if(res.status == 406){
+                         throw new Error('User already exist. '+ res.status);
+                     }else if(res.status < 200 || res.status >= 300){
+                         throw new Error('This request failed. '+ res.status);
+                     }else{
+                         if (res.json().status == 406){
+                             this.showalert = true;
+                             this.message = res.json().message;
+                             console.log("1111");
+                             console.log(this.message)
+                         }
+                         else{
+                             this.showalert = false;
+                             this.showsuccess = true;
+                             this.message = res.json().message
+                         }
+
+                     }
         })
+            .subscribe(
+                (data) =>  console.log(data),
+            );
     }
 
     deleteUser(username){
@@ -104,18 +131,34 @@ export class UserAdminComponent {
             this.userService.getUserList().subscribe((data) => (
                 this.UserList = data.json())
             );
+
+            this.showsuccess = true;
+            this.message = "Success delete user"
         },err =>{
-            console.log(err)
+            console.log(err);
+            this.alertService.error("User exists!")
         });
     }
 
     searchuserclick(username){
-        console.log("Search: " + username);
-        console.log('api/getUser/' + username);
+
         this.http.get('api/getUser/' + username)
-            .subscribe((data) => (this.UserSearchDeatails = data.json()));
+            .map(res =>{
+                if (res.json().status ==404){
+                    this.showalert = true;
+                    this.searched = false;
+                    this.message = "User not exist"
+                }else{
+                    this.showalert = false;
+                    this.searched = true;
+                    return res.json()
+                }
+            }).subscribe(
+            (data) => (this.UserSearchDeatails = data)
+        );
+        console.log("1111");
         console.log(this.UserSearchDeatails);
-        this.searched = true
+
 
     }
 }

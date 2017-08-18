@@ -2,10 +2,10 @@
  * Created by jack on 8/2/17.
  */
 import { Component } from '@angular/core';
-import { HttpModule, Headers,Http } from '@angular/http';
+import { HttpModule, Headers,Http, Response } from '@angular/http';
 import { HttpClientModule} from '@angular/common/http';
 import { RequestOptions, Request, RequestMethod} from '@angular/http';
-import { HttpClientService} from '../../services/Httpclient.service'
+import { HttpClientService} from '../../services/Httpclient.service';
 
 const options = new RequestOptions({
     url:"http://devtest.v5systems.us",
@@ -23,17 +23,38 @@ const options = new RequestOptions({
 })
 
 export class GatewayComponent {
-    public posturl= 'http://10.70.32.60/4480';
-    public body = {
-        "username": "v5admin123",
-        "password": "v5admin123"
-    };
+    message:string;
     public ReqRsult= [];
-    constructor(public httpclinetservice:HttpClientService) {
-        this.httpclinetservice.post(this.posturl,this.body)
-            .subscribe(
-                (data) =>(this.ReqRsult = data.json())
-            )
+    constructor(
+        public httpclinetservice:HttpClientService,
+        private  http :Http
+    ) {
+    }
+    clicklogin(){
+        console.log("***");
+        this.http.post('api/v5login', {
+                "username":"v5root",
+                "password":"v5admin12"
+            }).map(res =>{
+                if (res.json().apiStatus.responseStatus == 'status_ok'){
+                    this.message = "Success Login!";
+                }else{
+                    this.message = JSON.stringify(res.json().apiStatus.message)
+                }
+        }).subscribe(data=>{
+            console.log(data);
+        })
     }
 
+    clickallconnectunit(){
+        this.http.get('api/v5allconnect').map(res =>{
+            console.log("***2");
+            if (res.json()){
+                console.log(res);
+                this.message = JSON.stringify(res.json());
+            }
+        }).subscribe(data=>{
+            console.log(data);
+        })
+    }
 }

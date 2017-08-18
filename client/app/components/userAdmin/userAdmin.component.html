@@ -20,7 +20,12 @@
         <br/>
     </div>
 </div>
-
+<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">
+    <strong>Oh snap!</strong> {{message}}.
+</div>
+<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">
+    <strong>God Job!</strong> {{message}}!
+</div>
 <!-- userlist page -->
 <div  class="row active" id="userlist" >
     <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
@@ -57,6 +62,7 @@
 </div>
 
 <!-- add user page-->
+
 <div class="row hidden" id="adduser" style="margin-left: 1%; margin-right: 10%; width: 25%;" [hidden]="submitted">
     {{diagnostic}}
     <form role="form" (ngSubmit)="onSubmit(newUserForm)" #newUserForm="ngForm">
@@ -82,19 +88,19 @@
     </form>
     <button type="button" class=" btn btn-info"   [disabled]="!newUserForm.form.valid"
             style="float: right; margin-bottom: 2%" (click)="adduserclicked(model.username,model.password)">Submit</button>
-    <div [hidden]="!submitted">
-        <h2>You submitted the following:</h2>
-        <div class="row">
-            <div class="col-xs-3">Name</div>
-            <div class="col-xs-9  pull-left">{{ model.username }}</div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">Password</div>
-            <div class="col-xs-9 pull-left">{{ model.password}}</div>
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
+</div>
+<div [hidden]="!submitted">
+    <h2>You submitted the following:</h2>
+    <div class="row">
+        <div class="col-xs-3">Name</div>
+        <div class="col-xs-9  pull-left">{{ model.username }}</div>
     </div>
+    <div class="row">
+        <div class="col-xs-3">Password</div>
+        <div class="col-xs-9 pull-left">{{ model.password}}</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
 </div>
 
 <!-- Search user page-->
@@ -105,6 +111,7 @@
             <input type="text" #searchname class="form-control" placeholder="Username">
         </div>
         <button type="button" class=" btn btn-info" (click)="searchuserclick(searchname.value)" style="">Search</button>
+
     </form>
 
     <!-- Search result-->
