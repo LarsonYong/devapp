@@ -12,6 +12,8 @@ var User = require('../database/dataFile');
 var app = express();
 var bodyParser = require('body-parser');
 var request = require('request');
+// var cookieParser = require('cookie-parser');
+// app.use(cookieParser());
 
 
 // Get user list
@@ -139,7 +141,7 @@ router.post('/register',function (req,res,next) {
 
 
 // v5 login api
-router.post('/v5login',function (req,res,next) {
+router.post('/v5login60',function (req,res,next) {
     var username = req.body.username;
     var password = req.body.password;
     request.post(
@@ -150,32 +152,135 @@ router.post('/v5login',function (req,res,next) {
             }
         },
         function (error, response, body) {
-            if (!error && response.statusCode == 200) {
+            if (!error && response.statusCode === 200) {
+                var setcookie = response.headers["set-cookie"];
+                var body1= body;
 
-                console.log(body);
-                res.send(body)
+                if ( setcookie ) {
+                    setcookie.forEach(
+                        function ( cookiestr ) {
+                            console.log( "COOKIE: " + cookiestr );
+                        }
+                    );
+                }
+                res.json({"body":body1,"cookie":setcookie})
+            }else{
+                console.log('err')
             }
-            console.log("req.body   ");
-            console.log(req.body.username);
-            console.log(req.body.password)
         }
     );
 });
 
-
-// Get all connected units
-router.get('/v5allconnect',function (req,res,next) {
-    request.get(
-        'http://10.70.32.60:4480/api/units/getAllConnectedUnits',
-        function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-
-                console.log(body);
-                res.send(body)
+router.post('/v5login50',function (req,res,next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    request.post(
+        'http://10.70.32.50:4480/api/login', {
+            form:{
+                username:username,
+                password:password
             }
-            console.log("req.body   ");
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                var setcookie = response.headers["set-cookie"];
+                var body1= body;
+
+                if ( setcookie ) {
+                    setcookie.forEach(
+                        function ( cookiestr ) {
+                            console.log( "COOKIE: " + cookiestr );
+                        }
+                    );
+                }
+                res.json({"body":body1,"cookie":setcookie})
+            }else{
+                console.log('err')
+            }
         }
     );
+});
+
+router.post('/v5login40',function (req,res,next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    request.post(
+        'http://10.70.32.40:4480/api/login', {
+            form:{
+                username:username,
+                password:password
+            }
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                var setcookie = response.headers["set-cookie"];
+                var body1= body;
+
+                if ( setcookie ) {
+                    setcookie.forEach(
+                        function ( cookiestr ) {
+                            console.log( "COOKIE: " + cookiestr );
+                        }
+                    );
+                }
+                res.json({"body":body1,"cookie":setcookie})
+            }else{
+                console.log('err')
+            }
+        }
+    );
+});
+// Get all connected units
+
+router.post('/v5allconnect60',function (req,res,next) {
+    var cookie = req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.60:4480/api/units/getAllConnectedUnits',
+        method:'GET',
+        headers: {
+            'Cookie': cookie
+        }
+    };
+    console.log(cookie);
+    request(options,function (err,response,body) {
+        console.log("body **************");
+        console.log(body);
+        res.send(body);
+    })
+});
+
+router.post('/v5allconnect50',function (req,res,next) {
+    var cookie = req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.50:4480/api/units/getAllConnectedUnits',
+        method:'GET',
+        headers: {
+            'Cookie': cookie
+        }
+    };
+    console.log(cookie);
+    request(options,function (err,response,body) {
+        console.log("body **************");
+        console.log(body);
+        res.send(body);
+    })
+});
+
+router.post('/v5allconnect40',function (req,res,next) {
+    var cookie = req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.40:4480/api/units/getAllConnectedUnits',
+        method:'GET',
+        headers: {
+            'Cookie': cookie
+        }
+    };
+    console.log(cookie);
+    request(options,function (err,response,body) {
+        console.log("body **************");
+        console.log(body);
+        res.send(body);
+    })
 });
 
 

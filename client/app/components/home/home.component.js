@@ -20,7 +20,7 @@ var HomeComponent = (function () {
         this.userService = userService;
         this.UserList = [];
         this.userService.getUserList()
-            .subscribe(function (data) { return (_this.UserList = data.json()); });
+            .subscribe(function (data) { return (_this.UserList = data.json().apiData); });
     }
     HomeComponent = __decorate([
         core_1.Component({

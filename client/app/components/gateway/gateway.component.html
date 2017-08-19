@@ -1,43 +1,160 @@
-<h2> This is gateway page</h2>
-<div class="col-md-12">
-    <div style="width:90%; height:500px;border:1px solid; margin:2% 0 0 2%;">
-        <form>
+<div class="page-header" style="margin-right: 10%;border-bottom: solid #FFFFFF">
+    <h2> Gateway Detail</h2>
+</div>
 
-        </form>
-        <button (click)="clicklogin()" class="btn btn-lg btn-success" style="margin:2% 0 0 2%">login</button>
-        <button (click)="clickallconnectunit()" class="btn btn-lg btn-success" style="margin:2% 0 0 2%">All connect units</button>
-        <div class="50_result" style="margin:2% 0 0 2%;height:80%; width: 80%; border: 1px solid;">{{message}}</div>
+<div class="col-md-12">
+    <div>
+        <h3 style="border-bottom: 1px solid;margin-right: 8%">40 Server</h3>
+
+        <button (click)="clicklogin40()" class="btn btn-lg btn-success" style="margin:1% 1% 1% 0" >login</button>
+        <button (click)="clickallconnectunit40()" class="btn btn-lg btn-success" style="margin:1% 1% 1% 1%">All connect units</button>
+        <!--<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">-->
+        <!--<strong>Oh snap!</strong> {{message}}.-->
+        <!--</div>-->
+        <!--<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">-->
+        <!--<strong>God Job!</strong> {{message}}!-->
+        <!--</div>-->
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-
         <br />
     </div>
 </div>
 <div class="row">
-    <div class="table-responsive" style="border-bottom: 1px; margin-left: 1%; margin-right: 10%">
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 2%; margin-right: 10%" [hidden]="!showunits40form">
         <table class="table">
             <thead>
             <tr>
                 <th>S.No.</th>
-                <th>UserName</th>
-                <th>Skill</th>
-                <th>Project</th>
-                <th>Admin</th>
-                <th>Password</th>
+                <th>Unit ID</th>
+                <th>Label</th>
+                <th>Cluster</th>
+                <th>Status</th>
+                <th>Owner</th>
+
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
 
-            <tr *ngFor="let userData of ReqRsult  ; let i = index; trackBy: userId">
+            <tr *ngFor="let userData of allcnntdunitlist  ; let i = index; trackBy: userId">
                 <td>{{i+1}}</td>
-                <td>{{ReqRsult.apiStatus}}</td>
-                <td>{{ReqRsult.Skill}}</td>
-                <td>{{ReqRsult.Project}}</td>
-                <td>{{ReqRsult.admin}}</td>
-                <td>{{ReqRsult.Password}}</td>
+                <td>{{userData.unitId}}</td>
+                <td>{{userData.label}}</td>
+                <td>{{userData.cluster}}</td>
+                <td>{{userData.status}}</td>
+                <td>{{userData.owner}}</td>
+
+                <td>
+                    <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
+                    <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
+                    <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<div class="col-md-12">
+    <div>
+        <h3 style="border-bottom: 1px solid;margin-right: 8%">50 Server</h3>
+
+        <button (click)="clicklogin50()" class="btn btn-lg btn-success" style="margin:1% 1% 1% 0" >login</button>
+        <button (click)="clickallconnectunit50()" class="btn btn-lg btn-success" style="margin:1% 1% 1% 1%">All connect units</button>
+        <!--<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">-->
+            <!--<strong>Oh snap!</strong> {{message}}.-->
+        <!--</div>-->
+        <!--<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">-->
+            <!--<strong>God Job!</strong> {{message}}!-->
+        <!--</div>-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 2%; margin-right: 10%" [hidden]="!showunits50form">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Unit ID</th>
+                <th>Label</th>
+                <th>Cluster</th>
+                <th>Status</th>
+                <th>Owner</th>
+
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let userData of allcnntdunitlist  ; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{userData.unitId}}</td>
+                <td>{{userData.label}}</td>
+                <td>{{userData.cluster}}</td>
+                <td>{{userData.status}}</td>
+                <td>{{userData.owner}}</td>
+
+                <td>
+                    <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
+                    <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
+                    <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div>
+        <h3 style="border-bottom: 1px solid;margin-right: 8%">60 Server</h3>
+
+        <button (click)="clicklogin60()" class="btn btn-lg btn-success" style="margin:1% 1% 1% 0" >login</button>
+        <button (click)="clickallconnectunit60()" class="btn btn-lg btn-success" style="margin:1% 1% 1% 1%">All connect units</button>
+        <!--<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">-->
+        <!--<strong>Oh snap!</strong> {{message}}.-->
+        <!--</div>-->
+        <!--<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">-->
+        <!--<strong>God Job!</strong> {{message}}!-->
+        <!--</div>-->
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <br />
+    </div>
+</div>
+<div class="row">
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 2%; margin-right: 10%" [hidden]="!showunits60form">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Unit ID</th>
+                <th>Label</th>
+                <th>Cluster</th>
+                <th>Status</th>
+                <th>Owner</th>
+
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let userData of allcnntdunitlist  ; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{userData.unitId}}</td>
+                <td>{{userData.label}}</td>
+                <td>{{userData.cluster}}</td>
+                <td>{{userData.status}}</td>
+                <td>{{userData.owner}}</td>
+
                 <td>
                     <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
                     <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>

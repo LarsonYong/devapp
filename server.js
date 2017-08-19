@@ -4,6 +4,7 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 //The "bodyParser" middleware is used to get the data from request body
 // like POST, PUT and DELETE type request.
 

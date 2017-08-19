@@ -20,7 +20,7 @@ export class HomeComponent {
     public constructor(private userService:AppServices){
         this.userService.getUserList()
             .subscribe(
-                (data) => (this.UserList = data.json())
+                (data) => (this.UserList = data.json().apiData)
             );
     }
 }

@@ -28,36 +28,145 @@ var GatewayComponent = (function () {
     function GatewayComponent(httpclinetservice, http) {
         this.httpclinetservice = httpclinetservice;
         this.http = http;
+        this.showalert = false;
+        this.showsuccess = false;
+        this.showunits60form = false;
+        this.showunits50form = false;
+        this.showunits40form = false;
         this.ReqRsult = [];
+        var headers = new http_1.Headers();
     }
-    GatewayComponent.prototype.clicklogin = function () {
+    GatewayComponent.prototype.clicklogin60 = function () {
         var _this = this;
-        console.log("***");
-        this.http.post('api/v5login', {
+        this.http.post('api/v5login60', {
             "username": "v5root",
-            "password": "v5admin12"
+            "password": "v5admin123"
         }).map(function (res) {
-            if (res.json().apiStatus.responseStatus == 'status_ok') {
+            console.log(res.json());
+            console.log("111", res.json().body);
+            var botexdy = res.json().body;
+            var bos = JSON.parse(botexdy);
+            console.log(res.json().cookie[0]);
+            if (bos.apiStatus.responseStatus == 'status_ok') {
+                _this.showsuccess = true;
+                _this.showalert = false;
                 _this.message = "Success Login!";
+                alert(_this.message);
             }
             else {
-                _this.message = JSON.stringify(res.json().apiStatus.message);
+                _this.showsuccess = false;
+                _this.showalert = true;
+                _this.message = bos.apiStatus.responseStatus;
+                alert(_this.message);
             }
+            _this.cookie60 = res.json().cookie[0];
         }).subscribe(function (data) {
             console.log(data);
         });
     };
-    GatewayComponent.prototype.clickallconnectunit = function () {
+    GatewayComponent.prototype.clickallconnectunit60 = function () {
         var _this = this;
-        this.http.get('api/v5allconnect').map(function (res) {
-            console.log("***2");
-            if (res.json()) {
-                console.log(res);
-                _this.message = JSON.stringify(res.json());
+        this.http.post('api/v5allconnect60', {
+            "cookie": this.cookie60
+        }).map(function (res) {
+            var bos = res.json().apiStatus.responseStatus;
+            if (bos == "status_ok") {
+                _this.allcnntdunitlist = res.json().apiData;
+                _this.showunits60form = true;
             }
+            else {
+                alert("Need to login first");
+            }
+            console.log(res.json().apiData);
+        }).subscribe();
+    };
+    GatewayComponent.prototype.clicklogin50 = function () {
+        var _this = this;
+        this.http.post('api/v5login50', {
+            "username": "v5root",
+            "password": "v5admin123"
+        }).map(function (res) {
+            console.log(res.json());
+            console.log("111", res.json().body);
+            var botexdy = res.json().body;
+            var bos = JSON.parse(botexdy);
+            console.log(res.json().cookie[0]);
+            if (bos.apiStatus.responseStatus == 'status_ok') {
+                _this.showsuccess = true;
+                _this.showalert = false;
+                _this.message = "Success Login!";
+                alert(_this.message);
+            }
+            else {
+                _this.showsuccess = false;
+                _this.showalert = true;
+                _this.message = bos.apiStatus.responseStatus;
+                alert(_this.message);
+            }
+            _this.cookie50 = res.json().cookie[0];
         }).subscribe(function (data) {
             console.log(data);
         });
+    };
+    GatewayComponent.prototype.clickallconnectunit50 = function () {
+        var _this = this;
+        this.http.post('api/v5allconnect50', {
+            "cookie": this.cookie50
+        }).map(function (res) {
+            var bos = res.json().apiStatus.responseStatus;
+            if (bos == "status_ok") {
+                _this.allcnntdunitlist = res.json().apiData;
+                _this.showunits50form = true;
+            }
+            else {
+                alert("Need to login first");
+            }
+            console.log(res.json().apiData);
+        }).subscribe();
+    };
+    GatewayComponent.prototype.clicklogin40 = function () {
+        var _this = this;
+        this.http.post('api/v5login40', {
+            "username": "v5root",
+            "password": "v5admin123"
+        }).map(function (res) {
+            console.log(res.json());
+            console.log("111", res.json().body);
+            var botexdy = res.json().body;
+            var bos = JSON.parse(botexdy);
+            console.log(res.json().cookie[0]);
+            if (bos.apiStatus.responseStatus == 'status_ok') {
+                _this.showsuccess = true;
+                _this.showalert = false;
+                _this.message = "Success Login!";
+                alert(_this.message);
+            }
+            else {
+                _this.showsuccess = false;
+                _this.showalert = true;
+                _this.message = bos.apiStatus.responseStatus;
+                alert(_this.message);
+            }
+            _this.cookie40 = res.json().cookie[0];
+        }).subscribe(function (data) {
+            console.log(data);
+        });
+    };
+    GatewayComponent.prototype.clickallconnectunit40 = function () {
+        var _this = this;
+        this.http.post('api/v5allconnect40', {
+            "cookie": this.cookie40
+        }).map(function (res) {
+            var bos = res.json().apiStatus.responseStatus;
+            if (bos == "status_ok") {
+                _this.allcnntdunitlist = res.json().apiData;
+                _this.showunits40form = true;
+            }
+            else {
+                alert("Need to login first");
+            }
+            console.log(res.json().apiData);
+        }).subscribe();
     };
     GatewayComponent = __decorate([
         core_1.Component({

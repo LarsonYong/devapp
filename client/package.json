@@ -29,7 +29,9 @@
     "reflect-metadata": "^0.1.8",
     "rxjs": "5.4.2",
     "systemjs": "0.20.17",
-    "zone.js": "^0.8.16"
+    "zone.js": "^0.8.16",
+    "request": "latest",
+    "cookie-parser": "latest"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.34",
