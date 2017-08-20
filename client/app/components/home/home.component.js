@@ -19,6 +19,7 @@ var HomeComponent = (function () {
         var _this = this;
         this.userService = userService;
         this.UserList = [];
+        this.dev_logo = '/assets/devtest_logo.jpg';
         this.userService.getUserList()
             .subscribe(function (data) { return (_this.UserList = data.json().apiData); });
     }
