@@ -145,7 +145,7 @@ router.post('/v5login60',function (req,res,next) {
     var username = req.body.username;
     var password = req.body.password;
     request.post(
-        'http://10.70.32.60:4480/api/login', {
+        'http://devtest.v5systems.us:4480/api/login', {
             form:{
                 username:username,
                 password:password
@@ -235,7 +235,7 @@ router.post('/v5login40',function (req,res,next) {
 router.post('/v5allconnect60',function (req,res,next) {
     var cookie = req.body.cookie;
     var options = {
-        url: 'http://10.70.32.60:4480/api/units/getAllConnectedUnits',
+        url: 'http://devtest.v5systems.us:4480/api/units/getAllConnectedUnits',
         method:'GET',
         headers: {
             'Cookie': cookie
