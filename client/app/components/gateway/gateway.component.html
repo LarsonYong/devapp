@@ -134,6 +134,8 @@
                 <th>IP address</th>
                 <th>Primary iface</th>
                 <th>Status</th>
+                <th>Build version</th>
+                <th>Sensor board version</th>
                 <th>Action</th>
             </tr>
             </thead>
@@ -146,6 +148,8 @@
                 <td>{{userData.attrInfo.networkInfo.unitIp}}</td>
                 <td>{{userData.attrInfo.networkInfo.primary_iface}}</td>
                 <td>{{userData.status}}</td>
+                <td>tbf</td>
+                <td>tbf</td>
                 <td>
                     <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
                 </td>
