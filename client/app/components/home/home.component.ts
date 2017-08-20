@@ -17,8 +17,10 @@ import {isloggedin} from "../../services/authentication.service";
 
 export class HomeComponent {
     public UserList = [];
-    private  dev_logo= '/assets/devtest_logo.jpg';
-    public constructor(private userService:AppServices){
+
+    public constructor(
+        private userService:AppServices,
+    ){
         this.userService.getUserList()
             .subscribe(
                 (data) => (this.UserList = data.json().apiData)

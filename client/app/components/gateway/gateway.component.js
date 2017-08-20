@@ -28,6 +28,9 @@ var GatewayComponent = (function () {
     function GatewayComponent(httpclinetservice, http) {
         this.httpclinetservice = httpclinetservice;
         this.http = http;
+        this.loggedin60 = false;
+        this.loggedin50 = false;
+        this.loggedin40 = false;
         this.showalert = false;
         this.showsuccess = false;
         this.showunits60form = false;
@@ -50,6 +53,7 @@ var GatewayComponent = (function () {
             if (bos.apiStatus.responseStatus == 'status_ok') {
                 _this.showsuccess = true;
                 _this.showalert = false;
+                _this.loggedin60 = true;
                 _this.message = "Success Login!";
                 alert(_this.message);
             }
@@ -94,6 +98,7 @@ var GatewayComponent = (function () {
             if (bos.apiStatus.responseStatus == 'status_ok') {
                 _this.showsuccess = true;
                 _this.showalert = false;
+                _this.loggedin50 = true;
                 _this.message = "Success Login!";
                 alert(_this.message);
             }
@@ -138,6 +143,7 @@ var GatewayComponent = (function () {
             if (bos.apiStatus.responseStatus == 'status_ok') {
                 _this.showsuccess = true;
                 _this.showalert = false;
+                _this.loggedin40 = true;
                 _this.message = "Success Login!";
                 alert(_this.message);
             }

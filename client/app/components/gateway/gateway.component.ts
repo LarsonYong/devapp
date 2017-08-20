@@ -26,6 +26,9 @@ const options = new RequestOptions({
 
 export class GatewayComponent {
     public allcnntdunitlist : any;
+    loggedin60 = false;
+    loggedin50 = false;
+    loggedin40 = false;
     showalert= false;
     showsuccess = false;
     showunits60form = false;
@@ -57,6 +60,7 @@ export class GatewayComponent {
                 if (bos.apiStatus.responseStatus == 'status_ok'){
                     this.showsuccess = true;
                     this.showalert = false;
+                    this.loggedin60 = true;
                     this.message = "Success Login!";
                     alert(this.message)
                 }else{
@@ -85,6 +89,7 @@ export class GatewayComponent {
             console.log(res.json().apiData);
         }).subscribe();
     }
+
     clicklogin50(){
         this.http.post('api/v5login50', {
             "username":"v5root",
@@ -99,6 +104,7 @@ export class GatewayComponent {
             if (bos.apiStatus.responseStatus == 'status_ok'){
                 this.showsuccess = true;
                 this.showalert = false;
+                this.loggedin50 = true;
                 this.message = "Success Login!";
                 alert(this.message)
             }else{
@@ -127,6 +133,7 @@ export class GatewayComponent {
             console.log(res.json().apiData);
         }).subscribe();
     }
+
     clicklogin40(){
         this.http.post('api/v5login40', {
             "username":"v5root",
@@ -141,6 +148,7 @@ export class GatewayComponent {
             if (bos.apiStatus.responseStatus == 'status_ok'){
                 this.showsuccess = true;
                 this.showalert = false;
+                this.loggedin40 = true;
                 this.message = "Success Login!";
                 alert(this.message)
             }else{
