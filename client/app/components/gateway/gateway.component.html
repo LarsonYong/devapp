@@ -1,11 +1,14 @@
 <div class="page-header" style="margin-right: 10%;border-bottom: solid #FFFFFF">
     <h2> Gateway Detail</h2>
 </div>
+
+ <!--40 Server-->
 <div class="col-md-12">
     <div>
         <h3 style="border-bottom: 1px solid;margin-right: 15%">40 Server</h3>
         <button (click)="clicklogin40()" class="btn btn-lg btn-info" style="margin:0 0 1% 0" >login</button>
         <button (click)="clickallconnectunit40()" [disabled]="!loggedin40" class="btn btn-lg btn-default" style="margin:0 0 1% 1%">All connect units</button>
+        <button (click)="get40unitInfo()" class="btn btn-lg btn-default" [disabled]="!showunits40form" style="margin:0 0 1% 1%">Version</button>
     </div>
 </div>
 <div class="row">
@@ -14,7 +17,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="table-responsive" style="border-bottom: 1px; margin-left: 3%; margin-right: 17%" [hidden]="!showunits40form">
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 3%; margin-right: 17%" [hidden]="!showunits40form" >
         <table class="table">
             <thead>
             <tr>
@@ -24,42 +27,58 @@
                 <th>Cluster</th>
                 <th>Status</th>
                 <th>Owner</th>
-
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
-
-            <tr *ngFor="let userData of allcnntdunitlist  ; let i = index; trackBy: userId">
+            <tr *ngFor="let userData of allcnntdunitlist40  ; let i = index; trackBy: userId" [hidden]="!userData.status">
                 <td>{{i+1}}</td>
                 <td>{{userData.unitId}}</td>
                 <td>{{userData.label}}</td>
                 <td>{{userData.cluster}}</td>
                 <td>{{userData.status}}</td>
                 <td>{{userData.owner}}</td>
-
                 <td>
                     <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
                     <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
                     <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
                 </td>
             </tr>
-
+        </table>
+    </div>
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 3%; margin-right: 17%" [hidden]="!version40">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Unit ID</th>
+                <th>Build version</th>
+                <th>Sensor board version</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let unit of unitversion40; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{unit.versioninfo.unitId}}</td>
+                <td>{{unit.versioninfo.version}}</td>
+                <td>{{unit.versioninfo.sensorBoardVersion}}</td>
+                <td>
+                    <a [routerLink]="" [queryParams]="" class="btn btn-primary">Detail</a>
+                </td>
+            </tr>
         </table>
     </div>
 </div>
+
+
+<!--50 Server-->
 <div class="col-md-12">
     <div>
         <h3 style="border-bottom: 1px solid;margin-right: 15%">50 Server</h3>
-
         <button (click)="clicklogin50()" class="btn btn-lg btn-info" style="margin:0 0 1% 0" >login</button>
         <button (click)="clickallconnectunit50()" [disabled]="!loggedin50" class="btn btn-lg btn-default" style="margin:0 0 1% 1%">All connect units</button>
-        <!--<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">-->
-            <!--<strong>Oh snap!</strong> {{message}}.-->
-        <!--</div>-->
-        <!--<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">-->
-            <!--<strong>God Job!</strong> {{message}}!-->
-        <!--</div>-->
+        <button (click)="get50unitInfo()" class="btn btn-lg btn-default" [disabled]="!showunits50form" style="margin:0 0 1% 1%">Version</button>
     </div>
 </div>
 <div class="row">
@@ -83,39 +102,54 @@
             </tr>
             </thead>
             <tbody>
-
-            <tr *ngFor="let userData of allcnntdunitlist  ; let i = index; trackBy: userId">
+            <tr *ngFor="let userData of allcnntdunitlist50  ; let i = index; trackBy: userId" [hidden]="!userData.status">
                 <td>{{i+1}}</td>
                 <td>{{userData.unitId}}</td>
                 <td>{{userData.label}}</td>
                 <td>{{userData.cluster}}</td>
                 <td>{{userData.status}}</td>
                 <td>{{userData.owner}}</td>
-
                 <td>
                     <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
                     <a [routerLink]="['/edit/',userData.Username]" class="btn btn-success">Edit</a>
                     <a class="btn btn-danger" (click)="deleteUser(userData._id)">Delete</a>
                 </td>
             </tr>
-
+        </table>
+    </div>
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 3%; margin-right: 17%" [hidden]="!version50">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Unit ID</th>
+                <th>Build version</th>
+                <th>Sensor board version</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let unit of unitversion50; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{unit.versioninfo.unitId}}</td>
+                <td>{{unit.versioninfo.version}}</td>
+                <td>{{unit.versioninfo.sensorBoardVersion}}</td>
+                <td>
+                    <a  class="btn btn-primary">Detail</a>
+                </td>
+            </tr>
         </table>
     </div>
 </div>
 
+
+<!--60 Server-->
 <div class="col-md-12">
     <div>
         <h3 style="border-bottom: 1px solid;margin-right: 15%">60 Server</h3>
-
         <button (click)="clicklogin60()" class="btn btn-lg btn-info" style="margin:0 0 1% 0" >login</button>
         <button (click)="clickallconnectunit60()" class="btn btn-lg btn-default" [disabled]="!loggedin60" style="margin:0 0 1% 1%">All connect units</button>
-        <button class="btn btn-lg btn-default" [disabled]="!loggedin60" style="margin:0 0 1% 1%">TBD</button>
-        <!--<div class="alert alert-danger" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showalert">-->
-        <!--<strong>Oh snap!</strong> {{message}}.-->
-        <!--</div>-->
-        <!--<div class="alert alert-success" style="margin-left: 1%; margin-right: 10%; width: 25%;" role="alert" [hidden]="!showsuccess">-->
-        <!--<strong>God Job!</strong> {{message}}!-->
-        <!--</div>-->
+        <button (click)="get60unitInfo()" class="btn btn-lg btn-default" [disabled]="!showunits60form" style="margin:0 0 1% 1%">Version</button>
     </div>
 </div>
 <div class="row">
@@ -134,27 +168,46 @@
                 <th>IP address</th>
                 <th>Primary iface</th>
                 <th>Status</th>
-                <th>Build version</th>
-                <th>Sensor board version</th>
                 <th>Action</th>
             </tr>
             </thead>
             <tbody>
 
-            <tr *ngFor="let userData of allcnntdunitlist  ; let i = index; trackBy: userId">
+            <tr *ngFor="let userData of allcnntdunitlist60  ; let i = index; trackBy: userId" [hidden]="!userData.status">
                 <td>{{i+1}}</td>
                 <td>{{userData.unitId}}</td>
 
                 <td>{{userData.attrInfo.networkInfo.unitIp}}</td>
                 <td>{{userData.attrInfo.networkInfo.primary_iface}}</td>
                 <td>{{userData.status}}</td>
-                <td>tbf</td>
-                <td>tbf</td>
                 <td>
                     <a [routerLink]="['/userDetails/',userData.Username]" [queryParams]="{username:userData.Username}" class="btn btn-primary">Detail</a>
                 </td>
             </tr>
+        </table>
 
+    </div>
+    <div class="table-responsive" style="border-bottom: 1px; margin-left: 3%; margin-right: 17%" [hidden]="!version60">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>S.No.</th>
+                <th>Unit ID</th>
+                <th>Build version</th>
+                <th>Sensor board version</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let unit of unitversion60; let i = index; trackBy: userId">
+                <td>{{i+1}}</td>
+                <td>{{unit.versioninfo.unitId}}</td>
+                <td>{{unit.versioninfo.version}}</td>
+                <td>{{unit.versioninfo.sensorBoardVersion}}</td>
+            <td>
+                <a [routerLink]="" [queryParams]="" class="btn btn-primary">Detail</a>
+            </td>
+            </tr>
         </table>
     </div>
 </div>

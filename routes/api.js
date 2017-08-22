@@ -230,8 +230,9 @@ router.post('/v5login40',function (req,res,next) {
         }
     );
 });
-// Get all connected units
 
+
+// Get all connected units
 router.post('/v5allconnect60',function (req,res,next) {
     var cookie = req.body.cookie;
     var options = {
@@ -283,6 +284,58 @@ router.post('/v5allconnect40',function (req,res,next) {
     })
 });
 
+
+// Get unit version info
+router.post('/v5/60/units/info/:unitId',function (req,res,next) {
+    const unitId = req.params.unitId;
+    var cookie =req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.60:4480/api/units/info/' + unitId,
+        method: 'GET',
+        headers:{
+            'Cookie':cookie
+        }
+    };
+    console.log(options.url);
+    request(options,function (err,response,body) {
+        console.log(body);
+        res.send(body);
+    })
+});
+
+router.post('/v5/50/units/info/:unitId',function (req,res,next) {
+    const unitId = req.params.unitId;
+    var cookie =req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.50:4480/api/units/info/' + unitId,
+        method: 'GET',
+        headers:{
+            'Cookie':cookie
+        }
+    };
+    console.log(options.url);
+    request(options,function (err,response,body) {
+        console.log(body);
+        res.send(body);
+    })
+});
+
+router.post('/v5/40/units/info/:unitId',function (req,res,next) {
+    const unitId = req.params.unitId;
+    var cookie =req.body.cookie;
+    var options = {
+        url: 'http://10.70.32.40:4480/api/units/info/' + unitId,
+        method: 'GET',
+        headers:{
+            'Cookie':cookie
+        }
+    };
+    console.log(options.url);
+    request(options,function (err,response,body) {
+        console.log(body);
+        res.send(body);
+    })
+});
 
 // exports.getJSON = function(options, onResult)
 // {

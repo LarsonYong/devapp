@@ -25,7 +25,9 @@ const options = new RequestOptions({
 })
 
 export class GatewayComponent {
-    public allcnntdunitlist : any;
+    public allcnntdunitlist60 : any;
+    public allcnntdunitlist50 : any;
+    public allcnntdunitlist40 : any;
     loggedin60 = false;
     loggedin50 = false;
     loggedin40 = false;
@@ -38,6 +40,12 @@ export class GatewayComponent {
     cookie60:string;
     cookie50:string;
     cookie40:string;
+    version60 = false;
+    version50 = false;
+    version40 = false;
+    public unitversion60=[];
+    public unitversion50=[];
+    public unitversion40=[];
     public ReqRsult= [];
     constructor(
         public httpclinetservice:HttpClientService,
@@ -81,8 +89,10 @@ export class GatewayComponent {
         }).map(res =>{
             const bos = res.json().apiStatus.responseStatus;
             if(bos == "status_ok"){
-                this.allcnntdunitlist = res.json().apiData;
-                this.showunits60form = true
+                this.allcnntdunitlist60 = res.json().apiData;
+                this.showunits60form = true;
+                this.version60 = false;
+                this.unitversion60 = []
             }else{
                 alert("Need to login first")
             }
@@ -125,8 +135,9 @@ export class GatewayComponent {
         }).map(res =>{
             const bos = res.json().apiStatus.responseStatus;
             if(bos == "status_ok"){
-                this.allcnntdunitlist = res.json().apiData;
-                this.showunits50form = true
+                this.allcnntdunitlist50 = res.json().apiData;
+                this.showunits50form = true;
+                this.unitversion50 = [];
             }else{
                 alert("Need to login first")
             }
@@ -169,12 +180,85 @@ export class GatewayComponent {
         }).map(res =>{
             const bos = res.json().apiStatus.responseStatus;
             if(bos == "status_ok"){
-                this.allcnntdunitlist = res.json().apiData;
-                this.showunits40form = true
+                this.allcnntdunitlist40 = res.json().apiData;
+                this.showunits40form = true;
+                this.unitversion40 = [];
             }else{
                 alert("Need to login first")
             }
             console.log(res.json().apiData);
         }).subscribe();
+    }
+
+    get60unitInfo(){
+        this.version60 = true;
+        this.showunits60form = false;
+        for(let unit of this.allcnntdunitlist60){
+            if(unit.status == 1){
+                const url = 'api/v5/60/units/info/' + JSON.stringify(unit.unitId);
+                this.http.post(url,{
+                    "cookie":this.cookie60
+                }).map(res =>{
+                    const bos = res.json().apiStatus.responseStatus;
+                    if(bos == "status_ok"){
+                        this.unitversion60.push({
+                            'versioninfo':res.json().apiData
+                        });
+
+                    }else{
+                        alert("Need to login first")
+                    }
+                }).subscribe();
+            }else{
+                console.log("unit not up! _____________________")
+            }
+        }
+    }
+    get50unitInfo(){
+        this.version50 = true;
+        this.showunits50form = false;
+        for(let unit of this.allcnntdunitlist50){
+            if(unit.status == 1){
+                const url = 'api/v5/50/units/info/' + JSON.stringify(unit.unitId);
+                this.http.post(url,{
+                    "cookie":this.cookie50
+                }).map(res =>{
+                    const bos = res.json().apiStatus.responseStatus;
+                    if(bos == "status_ok"){
+                        this.unitversion50.push({
+                            'versioninfo':res.json().apiData
+                        });
+                    }else{
+                        alert("Need to login first")
+                    }
+                }).subscribe();
+            }else{
+                console.log("unit not up! _____________________")
+            }
+        }
+    }
+    get40unitInfo(){
+        this.version40 = true;
+        this.showunits40form = false;
+        for(let unit of this.allcnntdunitlist60){
+            if(unit.status == 1){
+                const url = 'api/v5/40/units/info/' + JSON.stringify(unit.unitId);
+                this.http.post(url,{
+                    "cookie":this.cookie40
+                }).map(res =>{
+                    const bos = res.json().apiStatus.responseStatus;
+                    if(bos == "status_ok"){
+                        this.unitversion40.push({
+                            'versioninfo':res.json().apiData
+                        });
+                        this.showunits40form = true;
+                    }else{
+                        alert("Need to login first")
+                    }
+                }).subscribe();
+            }else{
+                console.log("unit not up! _____________________")
+            }
+        }
     }
 }
