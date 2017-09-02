@@ -9,7 +9,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@angular/animations": "^4.3.3",
+    "@angular/animations": "^4.3.5",
+    "@angular/cdk": "^2.0.0-beta.8",
+    "@angular/core": "^4.3.5",
+    "@angular/material": "^2.0.0-beta.8",
     "@types/jquery": "^3.2.10",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
