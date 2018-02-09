@@ -21,6 +21,8 @@
     "jquery": "^3.2.1",
     "mongodb": "^2.2.31",
     "mongoose": "^4.11.5",
-    "ng2-cookies": "^1.0.12"
+    "ng2-cookies": "^1.0.12",
+    "request": "2.83",
+    "rxjs": "^5.4.3"
   }
 }
